@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FinSight — Credit Intelligence</title>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
@@ -17,89 +17,43 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); overflow-x: hidden; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font);
-      overflow-x: hidden;
-    }
-
-    /* ── NAVBAR ── */
+    /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 5%;
-      height: 68px;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; height: 68px;
       background: rgba(245,245,245,0.88);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo-mark {
-      width: 34px; height: 34px;
-      background: var(--card);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; background: var(--card);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
     }
-
     .nav-logo-mark svg { width: 18px; height: 18px; }
-
-    .nav-logo-text {
-      font-family: var(--font);
-      font-weight: 700;
-      font-size: 1.15rem;
-      color: var(--card);
-      letter-spacing: -0.3px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      font-size: 0.875rem;
-      color: var(--muted);
-      letter-spacing: 0.02em;
-      transition: color 0.2s;
-    }
-
+    .nav-logo-text { font-weight: 700; font-size: 1.15rem; color: var(--card); letter-spacing: -0.3px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.875rem; color: var(--muted); transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
 
-    /* ── HERO ── */
+    /* ── HERO (split layout) ── */
     .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: left;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 5% 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      padding: 100px 6% 60px;
       position: relative;
       overflow: hidden;
     }
-
-    /* Grid texture */
     .hero::before {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background-image:
         linear-gradient(rgba(26,29,37,0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(26,29,37,0.04) 1px, transparent 1px);
@@ -107,482 +61,212 @@
       pointer-events: none;
     }
 
-    /* Accent glow */
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 30%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(77,171,247,0.10) 0%, transparent 70%);
-      pointer-events: none;
+    /* LEFT */
+    .hero-left {
+      display: flex; flex-direction: column; align-items: flex-start;
+      animation: fadeUp 0.7s ease both;
     }
-
     .hero-tag {
-      display: inline-flex;
-      align-items: absolute;
-      gap: 6px;
-      background: var(--card);
-      color: var(--accent);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 100px;
-      margin-bottom: 2rem;
-      animation: fadeUp 0.6s ease both;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--card); color: var(--accent);
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 1.6rem;
     }
-
-    .hero-tag span { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; }
+    .hero-tag span { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
 
     h1 {
-     font-size: clamp(1.6rem, 3vw, 2.5rem);
-      font-weight: 700;
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      color: var(--card);
-      max-width: 820px;
-      animation: fadeUp 0.7s 0.1s ease both;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.03em;
+      color: var(--card); margin-bottom: 1.2rem;
     }
-
-    h1 em {
-      font-style: italic;
-      color: var(--muted);
-    }
+    h1 em { font-style: italic; color: var(--muted); }
 
     .hero-sub {
-      margin-top: 1.4rem;
-      font-size: 1.05rem;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 520px;
-      font-style: italic;
-      animation: fadeUp 0.7s 0.2s ease both;
+      font-size: 1rem; color: var(--muted); line-height: 1.75;
+      font-style: italic; max-width: 420px; margin-bottom: 2rem;
     }
-
-    .hero-cta {
-      margin-top: 2.6rem;
-      display: flex;
-      gap: 1rem;
-      animation: fadeUp 0.7s 0.3s ease both;
-    }
+    .hero-cta { display: flex; gap: 1rem; margin-bottom: 2.8rem; }
 
     .btn-primary {
-      background: var(--card);
-      color: #fff;
-      border: none;
-      padding: 14px 28px;
-      font-family: var(--font);
-      font-size: 0.875rem;
-      border-radius: 6px;
-      cursor: pointer;
-      letter-spacing: 0.01em;
+      background: var(--card); color: #fff; border: none;
+      padding: 13px 26px; font-family: var(--font); font-size: 0.875rem;
+      border-radius: 6px; cursor: pointer; text-decoration: none;
       transition: transform 0.15s, box-shadow 0.15s;
-      text-decoration: none;
     }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(26,29,37,0.18);
-    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,29,37,0.18); }
 
     .btn-ghost {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 14px 28px;
-      font-family: var(--font);
-      font-size: 0.875rem;
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--border); padding: 13px 26px;
+      font-family: var(--font); font-size: 0.875rem;
+      border-radius: 6px; cursor: pointer; text-decoration: none;
       transition: border-color 0.2s, color 0.2s;
     }
-
     .btn-ghost:hover { border-color: var(--card); color: var(--card); }
 
-    /* Floating stat cards */
-    .hero-stats {
-      display: flex;
-      gap: 1.2rem;
-      margin-top: 4rem;
-      animation: fadeUp 0.7s 0.4s ease both;
-      flex-wrap: wrap;
-      justify-content: center;
+    .hero-stats { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .stat-pill { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 10px 18px; }
+    .stat-pill .n { font-size: 1.3rem; font-weight: 700; color: var(--card); line-height: 1; }
+    .stat-pill .l { font-size: 0.7rem; color: var(--muted); margin-top: 3px; letter-spacing: 0.04em; }
+
+    /* RIGHT — upload */
+    .hero-right { animation: fadeUp 0.7s 0.15s ease both; }
+
+    .upload-label {
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 8px;
     }
-
-    .stat-pill {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 22px;
-      text-align: left;
-    }
-
-    .stat-pill .n {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--card);
-      line-height: 1;
-    }
-
-    .stat-pill .l {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-top: 3px;
-      letter-spacing: 0.04em;
-    }
-
-    /* ── SECTION LABEL (shared) ── */
-    .section-label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.4rem;
-    }
-
-    .section-label::before {
-      content: '';
-      width: 28px; height: 1px;
-      background: var(--muted);
-    }
-
-    /* ── HOW IT WORKS + UPLOAD (combined two-column section) ── */
-    #how {
-      padding: 110px 6%;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: top right;
-    }
-
-    .how-left h2 {
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 700;
-      color: var(--card);
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: 3rem;
-    }
-
-    .how-left h2 em { font-style: italic; color: var(--muted); }
-
-    /* Vertical consecutive steps */
-    .steps {
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    /* Connecting line */
-    .steps::before {
-      content: '';
-      position: absolute;
-      left: 21px;
-      top: 44px;
-      bottom: 44px;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--border) 0%, var(--border) 100%);
-    }
-
-    .step {
-      display: flex;
-      gap: 1.6rem;
-      padding: 0 0 2.8rem 0;
-      position: relative;
-      align-items: flex-start;
-    }
-
-    .step:last-child { padding-bottom: 0; }
-
-    .step-left {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-      z-index: 1;
-    }
-
-    .step-num-circle {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: #fff;
-      border: 1.5px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-      transition: background 0.25s, border-color 0.25s, color 0.25s;
-      flex-shrink: 0;
-    }
-
-    .step:hover .step-num-circle {
-      background: var(--card);
-      border-color: var(--card);
-      color: var(--accent);
-    }
-
-    .step-body {
-      padding-top: 10px;
-      flex: 1;
-    }
-
-    .step-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--card);
-      margin-bottom: 0.4rem;
-      transition: color 0.2s;
-    }
-
-    .step-desc {
-      font-size: 0.855rem;
-      color: var(--muted);
-      line-height: 1.7;
-      font-style: italic;
-    }
-
-    /* Arrow between steps (decorative) */
-    .step-arrow {
-      position: absolute;
-      left: 14px;
-      bottom: 8px;
-      color: var(--border);
-      font-size: 0.9rem;
-      line-height: 1;
-    }
-
-    .step:last-child .step-arrow { display: none; }
-
-    /* ── UPLOAD (right column) ── */
-    .how-right {
-      position: sticky;
-      top: 100px;
-    }
-
-    .how-right h2 {
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-      font-weight: 700;
-      color: var(--card);
-      letter-spacing: -0.02em;
-      margin-bottom: 0.4rem;
-    }
-
-    .how-right .sub {
-      font-size: 0.875rem;
-      color: var(--muted);
-      font-style: italic;
-      margin-bottom: 1.8rem;
-    }
+    .upload-label::before { content: ''; width: 22px; height: 1px; background: var(--muted); }
+    .upload-title { font-size: 1.5rem; font-weight: 700; color: var(--card); margin-bottom: 0.3rem; }
+    .upload-sub { font-size: 0.85rem; color: var(--muted); font-style: italic; margin-bottom: 1.6rem; }
 
     .drop-zone {
-      width: 100%;
-      border: 1.5px dashed #C8C8C8;
-      border-radius: 18px;
-      padding: 52px 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      background: #fff;
-      cursor: pointer;
-      position: relative;
+      width: 100%; border: 1.5px dashed #C8C8C8; border-radius: 18px;
+      padding: 52px 32px; display: flex; flex-direction: column;
+      align-items: center; gap: 0.9rem; background: #fff;
+      cursor: pointer; text-align: center;
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-      text-align: center;
     }
-
     .drop-zone.drag-over {
       border-color: var(--accent);
       background: rgba(77,171,247,0.04);
       box-shadow: 0 0 0 4px rgba(77,171,247,0.12);
     }
-
     .drop-icon {
-      width: 56px; height: 56px;
-      background: var(--card);
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 0.5rem;
+      width: 54px; height: 54px; background: var(--card);
+      border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.4rem;
     }
-
-    .drop-icon svg { width: 26px; height: 26px; stroke: var(--accent); fill: none; stroke-width: 1.6; }
-
-    .drop-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--card);
-    }
-
-    .drop-sub {
-      font-size: 0.82rem;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    .drop-badge {
-      display: flex;
-      gap: 8px;
-      margin-top: 0.4rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
+    .drop-icon svg { width: 24px; height: 24px; stroke: var(--accent); fill: none; stroke-width: 1.6; }
+    .drop-title { font-size: 1rem; font-weight: 700; color: var(--card); }
+    .drop-sub { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+    .drop-badges { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 0.3rem; }
     .badge {
-      background: var(--card);
-      color: #ccc;
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 100px;
+      background: var(--card); color: #ccc;
+      font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 100px;
     }
 
-    #file-input { display: none; }
-
-    /* Upload states */
-    .upload-loader {
-      display: none;
-      flex-direction: column;
-      align-items: right;
-      gap: 0.8rem;
-    }
-
+    .upload-loader { display: none; flex-direction: column; align-items: center; gap: 0.8rem; }
     .spinner {
-      width: 36px; height: 36px;
-      border: 2.5px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+      width: 34px; height: 34px;
+      border: 2.5px solid var(--border); border-top-color: var(--accent);
+      border-radius: 50%; animation: spin 0.8s linear infinite;
     }
-
     .upload-loader p { font-size: 0.85rem; color: var(--muted); font-style: italic; }
 
     .error-box {
-      display: none;
-      margin-top: 1.2rem;
-      background: #FFF5F5;
-      border: 1px solid #FFCDD2;
-      border-radius: 10px;
-      padding: 14px 20px;
-      font-size: 0.855rem;
-      color: #C62828;
-      width: 100%;
-      text-align: center;
+      display: none; margin-top: 1rem;
+      background: #FFF5F5; border: 1px solid #FFCDD2;
+      border-radius: 10px; padding: 12px 18px;
+      font-size: 0.84rem; color: #C62828; text-align: center;
     }
+    #file-input { display: none; }
+
+    /* ── SECTION LABEL (shared) ── */
+    .section-label {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.2rem;
+    }
+    .section-label::before { content: ''; width: 24px; height: 1px; background: var(--muted); }
+
+    /* ── FLOWCHART ── */
+    #how { padding: 100px 6%; max-width: 1100px; margin: 0 auto; }
+    #how h2 {
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-weight: 700; color: var(--card); letter-spacing: -0.02em; margin-bottom: 3rem;
+    }
+    #how h2 em { font-style: italic; color: var(--muted); }
+
+    .steps {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; position: relative;
+    }
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 22px; left: calc(16.67% + 22px); right: calc(16.67% + 22px);
+      height: 1px; background: var(--border); z-index: 0;
+    }
+    .step { display: flex; flex-direction: column; padding: 0 2rem 0 0; position: relative; z-index: 1; }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #fff; border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700; color: var(--muted);
+      margin-bottom: 1.4rem;
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+    }
+    .step:hover .step-num { background: var(--card); border-color: var(--card); color: var(--accent); }
+    .step-title { font-size: 0.95rem; font-weight: 700; color: var(--card); margin-bottom: 0.4rem; }
+    .step-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.7; font-style: italic; }
 
     /* ── ABOUT ── */
-    #about {
-      padding: 110px 5%;
-      background: var(--card);
-      color: #fff;
-    }
-
+    #about { padding: 100px 6%; background: var(--card); color: #fff; }
     .about-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
     }
-
     #about .section-label { color: rgba(255,255,255,0.35); }
     #about .section-label::before { background: rgba(255,255,255,0.25); }
-
     #about h2 {
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: 1.4rem;
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-weight: 700; color: #fff; letter-spacing: -0.02em;
+      line-height: 1.2; margin-bottom: 1.2rem;
     }
-
     #about h2 em { color: var(--accent); font-style: italic; }
+    #about p { font-size: 0.92rem; color: rgba(255,255,255,0.5); line-height: 1.75; font-style: italic; margin-bottom: 0.9rem; }
 
-    #about p {
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.75;
-      font-style: italic;
-      margin-bottom: 1rem;
-    }
-
-    .about-features {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
+    .about-features { display: flex; flex-direction: column; gap: 1rem; }
     .af {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 18px 20px;
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 10px;
-      transition: border-color 0.2s, background 0.2s;
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 16px 18px; border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; transition: border-color 0.2s, background 0.2s;
     }
-
     .af:hover { border-color: rgba(77,171,247,0.3); background: rgba(77,171,247,0.04); }
-
     .af-icon {
-      width: 36px; height: 36px; min-width: 36px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 8px;
+      width: 34px; height: 34px; min-width: 34px;
+      background: rgba(255,255,255,0.06); border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
     }
-
-    .af-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
-
+    .af-icon svg { width: 15px; height: 15px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
     .af h4 { font-size: 0.875rem; color: #fff; margin-bottom: 3px; }
-    .af p { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin: 0; font-style: italic; }
+    .af p { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin: 0; font-style: italic; }
 
     /* ── FOOTER ── */
     footer {
-      background: #0D0F15;
-      color: rgba(255,255,255,0.3);
-      text-align: center;
-      padding: 28px;
-      font-size: 0.78rem;
-      font-style: italic;
+      background: #0D0F15; color: rgba(255,255,255,0.3);
+      text-align: center; padding: 26px;
+      font-size: 0.78rem; font-style: italic;
     }
-
     footer strong { color: rgba(255,255,255,0.5); font-style: normal; }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      #how { grid-template-columns: 1fr; gap: 3.5rem; }
-      .how-right { position: static; }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .steps::before { display: none; }
+      .step { flex-direction: row; gap: 1.2rem; padding: 0 0 2rem 0; align-items: flex-start; }
+      .step-num { margin-bottom: 0; flex-shrink: 0; }
       .about-inner { grid-template-columns: 1fr; gap: 3rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
     <div class="nav-logo-mark">
-      <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 18 18" fill="none">
         <path d="M3 15 L9 3 L15 15" stroke="#4DABF7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M5.5 10.5 H12.5" stroke="#4DABF7" stroke-width="1.8" stroke-linecap="round"/>
       </svg>
@@ -596,71 +280,30 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <h1>190M+ Credit Invisible<br><em>Indians.</em></h1>
-  <p class="hero-sub">Upload your PhonePe or Axis Bank statement and receive an intelligent credit score analysis in seconds.</p>
-  <div class="hero-cta">
-    <a href="#upload" class="btn-primary">Analyse My Statement</a>
-    <a href="#how" class="btn-ghost">How it works</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat-pill"><div class="n">98%</div><div class="l">Accuracy Rate</div></div>
-    <div class="stat-pill"><div class="n">&lt; 5s</div><div class="l">Analysis Time</div></div>
-    <div class="stat-pill"><div class="n">2</div><div class="l">Banks Supported</div></div>
-    <div class="stat-pill"><div class="n">256-bit</div><div class="l">SSL Encryption</div></div>
-  </div>
-</section>
+<section class="hero" id="upload">
 
-<!-- HOW IT WORKS + UPLOAD (two-column) -->
-<section id="how">
-
-  <!-- LEFT: Steps -->
-  <div class="how-left">
-    <div class="section-label">Process</div>
-    <h2>Three steps to your <em>credit picture</em></h2>
-
-    <div class="steps">
-
-      <div class="step">
-        <div class="step-left">
-          <div class="step-num-circle">01</div>
-        </div>
-        <div class="step-body">
-          <div class="step-title">Upload Statement</div>
-          <p class="step-desc">Drag and drop your PhonePe or Axis Bank PDF statement onto the panel. We handle password-protected files too.</p>
-        </div>
-        <div class="step-arrow">↓</div>
-      </div>
-
-      <div class="step">
-        <div class="step-left">
-          <div class="step-num-circle">02</div>
-        </div>
-        <div class="step-body">
-          <div class="step-title">AI Parses Your Data</div>
-          <p class="step-desc">Our engine reads your transaction history, identifies spending patterns, and extracts key financial signals lenders look for.</p>
-        </div>
-        <div class="step-arrow">↓</div>
-      </div>
-
-      <div class="step">
-        <div class="step-left">
-          <div class="step-num-circle">03</div>
-        </div>
-        <div class="step-body">
-          <div class="step-title">View Your Score</div>
-          <p class="step-desc">Receive a comprehensive credit score with categorised insights, risk factors, and actionable recommendations — in seconds.</p>
-        </div>
-      </div>
-
+  <!-- LEFT: copy + stats -->
+  <div class="hero-left">
+    <div class="hero-tag"><span></span> Credit Intelligence</div>
+    <h1>190M+ Credit<br>Invisible <em>Indians.</em></h1>
+    <p class="hero-sub">Upload your PhonePe or Axis Bank statement and receive an intelligent credit score analysis in seconds.</p>
+    <div class="hero-cta">
+      <a href="#upload" class="btn-primary">Analyse My Statement</a>
+      <a href="#how" class="btn-ghost">How it works</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-pill"><div class="n">98%</div><div class="l">Accuracy Rate</div></div>
+      <div class="stat-pill"><div class="n">&lt;5s</div><div class="l">Analysis Time</div></div>
+      <div class="stat-pill"><div class="n">2</div><div class="l">Banks Supported</div></div>
+      <div class="stat-pill"><div class="n">256-bit</div><div class="l">SSL Encryption</div></div>
     </div>
   </div>
 
-  <!-- RIGHT: Upload -->
-  <div class="how-right" id="upload">
-    <div class="section-label">Upload</div>
-    <h2>Drop your statement</h2>
-    <p class="sub">Supports PhonePe &amp; Axis Bank PDFs · Private &amp; secure</p>
+  <!-- RIGHT: drop zone -->
+  <div class="hero-right">
+    <div class="upload-label">Upload</div>
+    <div class="upload-title">Drop your statement</div>
+    <p class="upload-sub">Supports PhonePe &amp; Axis Bank PDFs · Private &amp; secure</p>
 
     <div class="drop-zone" id="dropZone">
       <div id="dropContent">
@@ -669,7 +312,7 @@
         </div>
         <div class="drop-title">Drag &amp; drop your PDF here</div>
         <div class="drop-sub">or click to browse files</div>
-        <div class="drop-badge">
+        <div class="drop-badges">
           <span class="badge">PhonePe</span>
           <span class="badge">Axis Bank</span>
           <span class="badge">PDF only</span>
@@ -680,14 +323,33 @@
         <p>Analysing your statement…</p>
       </div>
     </div>
-
-    <div class="error-box" id="errorBox">
-      ⚠ Invalid statement. Please upload a PhonePe or Axis Bank PDF.
-    </div>
-
-    <input type="file" id="file-input" accept=".pdf" />
+    <div class="error-box" id="errorBox">⚠ Invalid statement. Please upload a PhonePe or Axis Bank PDF.</div>
+    <input type="file" id="file-input" accept=".pdf"/>
   </div>
 
+</section>
+
+<!-- FLOWCHART -->
+<section id="how">
+  <div class="section-label">Process</div>
+  <h2>Three steps to your <em>credit picture</em></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Upload Statement</div>
+      <p class="step-desc">Drag and drop your PhonePe or Axis Bank PDF. We handle password-protected files too.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">AI Parses Your Data</div>
+      <p class="step-desc">Our engine reads transactions, identifies spending patterns, and extracts the financial signals lenders care about.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">View Your Score</div>
+      <p class="step-desc">Receive a credit score with categorised insights, risk factors, and actionable recommendations — in seconds.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ABOUT -->
@@ -701,31 +363,16 @@
     </div>
     <div class="about-features">
       <div class="af">
-        <div class="af-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div>
-          <h4>Privacy First</h4>
-          <p>Your PDF is processed in-memory and never stored on our servers.</p>
-        </div>
+        <div class="af-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><h4>Privacy First</h4><p>Your PDF is processed in-memory and never stored on our servers.</p></div>
       </div>
       <div class="af">
-        <div class="af-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <div>
-          <h4>Instant Dashboard</h4>
-          <p>Scores, category breakdowns, and risk factors rendered in real time.</p>
-        </div>
+        <div class="af-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div><h4>Instant Dashboard</h4><p>Scores, category breakdowns, and risk factors rendered in real time.</p></div>
       </div>
       <div class="af">
-        <div class="af-icon">
-          <svg viewBox="0 0 24 24"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
-        </div>
-        <div>
-          <h4>Lender-Grade Analysis</h4>
-          <p>The same signals that banks use — income regularity, utilisation, volatility.</p>
-        </div>
+        <div class="af-icon"><svg viewBox="0 0 24 24"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div>
+        <div><h4>Lender-Grade Analysis</h4><p>The same signals banks use — income regularity, utilisation, volatility.</p></div>
       </div>
     </div>
   </div>
@@ -737,59 +384,38 @@
 </footer>
 
 <script>
-  const dropZone = document.getElementById('dropZone');
-  const fileInput = document.getElementById('file-input');
+  const dropZone    = document.getElementById('dropZone');
+  const fileInput   = document.getElementById('file-input');
   const dropContent = document.getElementById('dropContent');
   const uploadLoader = document.getElementById('uploadLoader');
-  const errorBox = document.getElementById('errorBox');
+  const errorBox    = document.getElementById('errorBox');
 
   dropZone.addEventListener('click', () => fileInput.click());
-
-  dropZone.addEventListener('dragover', e => {
-    e.preventDefault();
-    dropZone.classList.add('drag-over');
-  });
-
-  dropZone.addEventListener('dragleave', () => {
-    dropZone.classList.remove('drag-over');
-  });
-
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
   dropZone.addEventListener('drop', e => {
     e.preventDefault();
     dropZone.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file) handleFile(file);
+    if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
   });
-
   fileInput.addEventListener('change', () => {
     if (fileInput.files[0]) handleFile(fileInput.files[0]);
   });
 
   async function handleFile(file) {
-    if (!file.name.toLowerCase().endsWith('.pdf')) {
-      showError();
-      return;
-    }
-
+    if (!file.name.toLowerCase().endsWith('.pdf')) { showError(); return; }
     errorBox.style.display = 'none';
     dropContent.style.display = 'none';
     uploadLoader.style.display = 'flex';
-
-    const formData = new FormData();
-    formData.append('file', file);
-
     try {
-      const res = await fetch('http://localhost:8000/upload', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (!res.ok) throw new Error('Server error');
-
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('http://localhost:8000/upload', { method: 'POST', body: fd });
+      if (!res.ok) throw new Error();
       const data = await res.json();
       sessionStorage.setItem('finsight_result', JSON.stringify(data));
       window.location.href = 'dashboard.html';
-    } catch (err) {
+    } catch {
       uploadLoader.style.display = 'none';
       dropContent.style.display = 'flex';
       showError();
