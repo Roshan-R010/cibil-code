@@ -413,7 +413,8 @@
       const res = await fetch('http://localhost:8000/upload', { method: 'POST', body: fd });
       if (!res.ok) throw new Error();
       const data = await res.json();
-      sessionStorage.setItem('finsight_result', JSON.stringify(data));
+      sessionStorage.setItem('uploaded', 'true');
+      sessionStorage.setItem('finsight_upload', JSON.stringify(data));
       window.location.href = 'dashboard.html';
     } catch {
       uploadLoader.style.display = 'none';

@@ -23,7 +23,6 @@
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: var(--font); overflow-x: hidden; }
 
-    /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -42,7 +41,6 @@
     .btn-logout { background: transparent; border: 1px solid #FFCDD2; padding: 7px 18px; border-radius: 6px; font-family: var(--font); font-size: 0.8rem; color: var(--red); cursor: pointer; transition: all 0.2s; }
     .btn-logout:hover { background: #FFF5F5; border-color: var(--red); }
 
-    /* MAIN */
     main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
     .page-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 32px; }
     .section-label { display: flex; align-items: center; gap: 10px; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
@@ -51,11 +49,9 @@
     .page-header h1 em { font-style: italic; color: var(--muted); }
     .step-pill { padding: 6px 14px; border-radius: 100px; background: var(--card); color: var(--accent); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--font); border: none; }
 
-    /* STATES */
     #state-form, #state-insights { display: none; }
     #state-form.active, #state-insights.active { display: block; }
 
-    /* FORM */
     .form-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 40px; }
     .form-intro { margin-bottom: 28px; }
     .form-intro h2 { font-size: 1.1rem; font-weight: 700; color: var(--card); }
@@ -72,30 +68,22 @@
     .btn-submit { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 13px 26px; background: var(--card); color: #fff; font-family: var(--font); font-size: 0.875rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; margin-top: 10px; }
     .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,29,37,0.18); }
 
-    /* LOADING */
     #loading-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(245,245,245,0.92); backdrop-filter: blur(8px); flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
     #loading-overlay.show { display: flex; }
     .loader-ring { width: 44px; height: 44px; border-radius: 50%; border: 2.5px solid var(--border); border-top-color: var(--accent); animation: spin 0.85s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .loader-text { color: var(--muted); font-size: 0.88rem; font-style: italic; }
 
-    /* ══ INSIGHTS ══ */
     .insights-stack { display: flex; flex-direction: column; gap: 20px; }
     .w-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; }
     .w-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
     .w-label::before { content: ''; width: 18px; height: 1px; background: var(--muted); }
 
-    /* ROW 1: Score + Line chart */
     .row1 { display: grid; grid-template-columns: 300px 1fr; gap: 20px; align-items: start; }
 
-    /* ── SCORE (simple style) ── */
     .score-num { font-size: 5rem; font-weight: 700; letter-spacing: -5px; line-height: 1; color: var(--card); }
     .score-outof { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-top: 4px; margin-bottom: 20px; }
-    .score-band {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 16px; border-radius: 8px; font-size: 0.95rem; font-weight: 700;
-      margin-bottom: 14px; width: 100%;
-    }
+    .score-band { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 8px; font-size: 0.95rem; font-weight: 700; margin-bottom: 14px; width: 100%; }
     .score-band .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
     .score-band.poor      { background: #FFF5F5; border: 1.5px solid #FFCDD2; color: #C62828; }
     .score-band.poor .dot { background: #C62828; box-shadow: 0 0 6px rgba(198,40,40,0.4); }
@@ -106,9 +94,6 @@
     .score-band.excellent { background: #EFF8FF; border: 1.5px solid #BAE0FB; color: #1A87D4; }
     .score-band.excellent .dot { background: #1A87D4; box-shadow: 0 0 6px rgba(26,135,212,0.4); }
 
-
-
-    /* form validation */
     .form-group input.error, .form-group select.error { border-color: #E53935 !important; background: #FFF5F5 !important; box-shadow: 0 0 0 3px rgba(229,57,53,0.1) !important; }
     .field-error { font-size: 0.72rem; color: #E53935; margin-top: 4px; font-style: italic; display: none; }
     .field-error.show { display: block; }
@@ -116,7 +101,6 @@
     .form-error-msg.show { display: block; }
     .btn-submit.disabled { background: #C8CDD6 !important; color: #9CA3AF !important; cursor: not-allowed !important; box-shadow: none !important; transform: none !important; }
 
-    /* ── LINE CHART ── */
     .line-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
     .line-stats { display: flex; gap: 0; }
     .ls { padding: 0 18px; }
@@ -126,24 +110,12 @@
     .ls .ll { font-size: 0.6rem; color: var(--muted); font-style: italic; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }
     .line-wrap { position: relative; height: 220px; }
 
-    /* ROW 2: Budget rainbow + Loan */
     .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
 
-    /* ── RAINBOW ARC (SVG) ── */
     .arc-svg-container { position: relative; width: 100%; max-width: 340px; margin: 0 auto; }
     .arc-svg-container svg { width: 100%; display: block; overflow: visible; }
 
-    /* hover tooltip */
-    .arc-tooltip {
-      position: fixed; z-index: 999;
-      background: #1A1D25; color: #fff;
-      padding: 10px 14px; border-radius: 10px;
-      font-family: var(--font); font-size: 0.78rem;
-      pointer-events: none; opacity: 0;
-      transition: opacity 0.15s;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      white-space: nowrap;
-    }
+    .arc-tooltip { position: fixed; z-index: 999; background: #1A1D25; color: #fff; padding: 10px 14px; border-radius: 10px; font-family: var(--font); font-size: 0.78rem; pointer-events: none; opacity: 0; transition: opacity 0.15s; box-shadow: 0 4px 20px rgba(0,0,0,0.2); white-space: nowrap; }
     .arc-tooltip .tt-name { font-style: italic; color: rgba(255,255,255,0.55); font-size: 0.68rem; margin-bottom: 3px; }
     .arc-tooltip .tt-amt  { font-weight: 700; font-size: 1rem; letter-spacing: -0.3px; }
     .arc-tooltip .tt-pct  { color: rgba(255,255,255,0.6); font-size: 0.72rem; margin-top: 1px; }
@@ -152,7 +124,6 @@
     .arc-total-below .atv { font-size: 1.3rem; font-weight: 700; color: var(--card); letter-spacing: -0.5px; }
     .arc-total-below .atl { font-size: 0.62rem; color: var(--muted); font-style: italic; text-transform: uppercase; letter-spacing: 0.08em; }
 
-    /* bullet list */
     .budget-bullets { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; }
     .bb-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.76rem; }
     .bb-left { display: flex; align-items: center; gap: 9px; color: var(--text); }
@@ -161,30 +132,29 @@
     .bb-amt { font-weight: 700; color: var(--card); }
     .bb-pct { font-size: 0.65rem; color: var(--muted); font-style: italic; background: var(--bg); border: 1px solid var(--border); border-radius: 100px; padding: 2px 8px; }
 
-    /* LOAN */
-    .loan-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .loan-item2 { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
-    .loan-item2 .lv2 { font-size: 1.25rem; font-weight: 700; color: var(--card); letter-spacing: -0.4px; }
-    .loan-item2 .ll2 { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 5px; font-style: italic; }
+    /* repayment card */
+    .repay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .repay-item { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+    .repay-item .rv { font-size: 1.25rem; font-weight: 700; color: var(--card); letter-spacing: -0.4px; }
+    .repay-item .rl { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 5px; font-style: italic; }
 
-    /* TOAST */
+    /* breakdown table */
+    .breakdown-list { display: flex; flex-direction: column; gap: 8px; }
+    .bk-row { display: flex; align-items: center; gap: 12px; font-size: 0.8rem; }
+    .bk-signal { flex: 1; color: var(--text); }
+    .bk-bar-wrap { width: 120px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .bk-bar { height: 100%; border-radius: 3px; }
+    .bk-delta { width: 48px; text-align: right; font-weight: 700; font-size: 0.78rem; }
+    .bk-delta.pos { color: #00A388; }
+    .bk-delta.neg { color: var(--red); }
+
     #toast { position: fixed; bottom: 28px; right: 28px; z-index: 300; padding: 12px 20px; border-radius: 8px; font-size: 0.84rem; font-style: italic; transform: translateY(60px); opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; font-family: var(--font); }
     #toast.show   { transform: translateY(0); opacity: 1; }
     #toast.error  { background: #FFF5F5; border: 1px solid #FFCDD2; color: #C62828; }
     #toast.success{ background: #F0FDF9; border: 1px solid #99E6D8; color: #00A388; }
 
-    @media (max-width: 860px) {
-      .row1 { grid-template-columns: 1fr; }
-      .row2 { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 560px) {
-      nav { padding: 0 20px; }
-      main { padding: 24px 14px 60px; }
-      .form-card { padding: 22px; }
-      .form-grid { grid-template-columns: 1fr; }
-      .btn-submit { grid-column: auto; }
-      .page-header { flex-direction: column; gap: 12px; }
-    }
+    @media (max-width: 860px) { .row1 { grid-template-columns: 1fr; } .row2 { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { nav { padding: 0 20px; } main { padding: 24px 14px 60px; } .form-card { padding: 22px; } .form-grid { grid-template-columns: 1fr; } .btn-submit { grid-column: auto; } .page-header { flex-direction: column; gap: 12px; } }
   </style>
 </head>
 <body>
@@ -241,20 +211,23 @@
         <div class="form-group"><label>Occupation</label><input type="text" id="occupation" placeholder="e.g. Software Engineer"/><span class="field-error" id="err_occupation">Please enter your occupation</span></div>
         <div class="form-group">
           <label>Employment Type</label>
-          <select id="employment_type"><option value="" disabled selected>Select type</option><option>Student</option><option>Salaried</option><option>Self-employed</option><option>Gig worker</option></select><span class="field-error" id="err_employment_type">Please select employment type</span>
+          <select id="employment_type"><option value="" disabled selected>Select type</option><option>Student</option><option>Salaried</option><option>Self-employed</option><option>Gig worker</option></select>
+          <span class="field-error" id="err_employment_type">Please select employment type</span>
         </div>
         <div class="form-group"><label>Years of Work Experience</label><input type="number" id="work_exp" placeholder="e.g. 4" min="0"/><span class="field-error" id="err_work_exp">Please enter years of experience</span></div>
         <div class="form-group"><label>Monthly Income (₹)</label><input type="number" id="monthly_income" placeholder="e.g. 65000" min="0"/><span class="field-error" id="err_monthly_income">Please enter your monthly income</span></div>
         <div class="form-divider"><span>Housing & Family</span></div>
         <div class="form-group">
           <label>Housing Status</label>
-          <select id="housing_status"><option value="" disabled selected>Select status</option><option>Owned</option><option>Rented</option><option>Family Owned</option></select><span class="field-error" id="err_housing_status">Please select housing status</span>
+          <select id="housing_status"><option value="" disabled selected>Select status</option><option>Owned</option><option>Rented</option><option>Family Owned</option></select>
+          <span class="field-error" id="err_housing_status">Please select housing status</span>
         </div>
         <div class="form-group"><label>Years at Current Residence</label><input type="number" id="residence_years" placeholder="e.g. 3" min="0"/><span class="field-error" id="err_residence_years">Please enter years at residence</span></div>
         <div class="form-group"><label>Earning Members in Family</label><input type="number" id="earning_members" placeholder="e.g. 2" min="1"/><span class="field-error" id="err_earning_members">Please enter number of earning members</span></div>
         <div class="form-group">
           <label>Loan Purpose</label>
-          <select id="loan_purpose"><option value="" disabled selected>Select purpose</option><option>Education</option><option>Business</option><option>Personal</option><option>Home</option><option>Vehicle</option></select><span class="field-error" id="err_loan_purpose">Please select loan purpose</span>
+          <select id="loan_purpose"><option value="" disabled selected>Select purpose</option><option>Education</option><option>Business</option><option>Personal</option><option>Home</option><option>Vehicle</option></select>
+          <span class="field-error" id="err_loan_purpose">Please select loan purpose</span>
         </div>
         <div class="form-error-msg" id="formErrorMsg">⚠ Please fill in all the fields above before generating your score.</div>
         <button class="btn-submit disabled" id="submitBtn" onclick="submitForm()">
@@ -271,8 +244,6 @@
 
       <!-- ROW 1: Score + Line -->
       <div class="row1">
-
-        <!-- Score -->
         <div class="w-card">
           <div class="w-label">Credit Score</div>
           <div class="score-num" id="scoreNum">—</div>
@@ -281,10 +252,8 @@
             <span class="dot"></span>
             <span id="scoreBandLabel">Good</span>
           </div>
-
         </div>
 
-        <!-- Line chart -->
         <div class="w-card">
           <div class="line-top">
             <div class="w-label" style="margin-bottom:0;">Cumulative Spend Trend</div>
@@ -292,13 +261,10 @@
           </div>
           <div class="line-wrap"><canvas id="lineChart"></canvas></div>
         </div>
-
       </div>
 
-      <!-- ROW 2: Budget arc + Loan -->
+      <!-- ROW 2: Budget arc + Repayment -->
       <div class="row2">
-
-        <!-- Budget breakdown with rainbow arcs -->
         <div class="w-card">
           <div class="w-label">Budget Breakdown</div>
           <div class="arc-svg-container">
@@ -311,35 +277,50 @@
           <div class="budget-bullets" id="budgetBullets"></div>
         </div>
 
-        <!-- Loan -->
+        <!-- Repayment Capacity — replaces hardcoded loan -->
         <div class="w-card">
-          <div class="w-label">Loan Eligibility</div>
-          <div class="loan-grid2">
-            <div class="loan-item2"><div class="lv2" id="loanAmount">—</div><div class="ll2">Max Loan Amount</div></div>
-            <div class="loan-item2"><div class="lv2" id="loanEMI">—</div><div class="ll2">EMI / month</div></div>
-            <div class="loan-item2"><div class="lv2" id="loanTenure">—</div><div class="ll2">Tenure</div></div>
-            <div class="loan-item2"><div class="lv2" id="loanRate">—</div><div class="ll2">Interest Rate</div></div>
+          <div class="w-label">Repayment Capacity</div>
+          <div class="repay-grid">
+            <div class="repay-item"><div class="rv" id="repayIncome">—</div><div class="rl">Monthly Income</div></div>
+            <div class="repay-item"><div class="rv" id="repaySpent">—</div><div class="rl">Monthly Spending</div></div>
+            <div class="repay-item"><div class="rv" id="repayDisposable">—</div><div class="rl">Disposable Income</div></div>
+            <div class="repay-item"><div class="rv" id="repayEMI">—</div><div class="rl">Max Safe EMI/month</div></div>
+            <div class="repay-item"><div class="rv" id="repayRate">—</div><div class="rl">Interest Rate</div></div>
+            <div class="repay-item"><div class="rv" id="repayRisk">—</div><div class="rl">Risk Level</div></div>
           </div>
         </div>
-
       </div>
+
+      <!-- ROW 3: Score breakdown -->
+      <div class="w-card">
+        <div class="w-label">Score Breakdown — what affected your score</div>
+        <div class="breakdown-list" id="breakdownList"></div>
+      </div>
+
     </div>
   </div>
 </main>
 
 <script>
-  const stored = sessionStorage.getItem('finsight_data') || '{}';
-  const sessionData = JSON.parse(stored);
+  // ── Session check ──
+  if (!sessionStorage.getItem('uploaded')) {
+    window.location.href = 'home.html';
+  }
+
+  // Get transactions from upload step
+  const uploadData = JSON.parse(sessionStorage.getItem('finsight_upload') || '{}');
   let lineInstance = null;
 
-  function logout() { sessionStorage.clear(); window.location.href = 'index.html'; }
+  function logout() { sessionStorage.clear(); window.location.href = 'home.html'; }
+
   function showToast(msg, type = 'error') {
     const t = document.getElementById('toast');
     t.textContent = msg; t.className = `show ${type}`;
     setTimeout(() => t.className = '', 3500);
   }
 
-  const FIELD_IDS = ['full_name','age','occupation','employment_type','work_exp','monthly_income','housing_status','residence_years','earning_members','loan_purpose'];
+  const FIELD_IDS = ['full_name','age','occupation','employment_type','work_exp',
+                     'monthly_income','housing_status','residence_years','earning_members','loan_purpose'];
 
   function checkAllFilled() {
     return FIELD_IDS.every(id => document.getElementById(id).value.trim() !== '');
@@ -347,39 +328,29 @@
 
   function updateSubmitBtn() {
     const btn = document.getElementById('submitBtn');
-    if (checkAllFilled()) {
-      btn.classList.remove('disabled');
-    } else {
-      btn.classList.add('disabled');
-    }
+    checkAllFilled() ? btn.classList.remove('disabled') : btn.classList.add('disabled');
   }
 
-  // attach live listeners
   window.addEventListener('DOMContentLoaded', () => {
     FIELD_IDS.forEach(id => {
       const el = document.getElementById(id);
-      if (el) el.addEventListener('input', () => { clearFieldError(id); updateSubmitBtn(); });
+      if (el) el.addEventListener('input',  () => { clearFieldError(id); updateSubmitBtn(); });
       if (el) el.addEventListener('change', () => { clearFieldError(id); updateSubmitBtn(); });
     });
   });
 
   function showFieldError(id) {
-    const el = document.getElementById(id);
-    const err = document.getElementById('err_' + id);
-    if (el) el.classList.add('error');
-    if (err) err.classList.add('show');
+    document.getElementById(id)?.classList.add('error');
+    document.getElementById('err_' + id)?.classList.add('show');
   }
 
   function clearFieldError(id) {
-    const el = document.getElementById(id);
-    const err = document.getElementById('err_' + id);
-    if (el) el.classList.remove('error');
-    if (err) err.classList.remove('show');
+    document.getElementById(id)?.classList.remove('error');
+    document.getElementById('err_' + id)?.classList.remove('show');
   }
 
   async function submitForm() {
     if (!checkAllFilled()) {
-      // highlight all empty fields
       let hasEmpty = false;
       FIELD_IDS.forEach(id => {
         const el = document.getElementById(id);
@@ -393,98 +364,96 @@
       }
       return;
     }
-    // clear all errors
+
     FIELD_IDS.forEach(id => clearFieldError(id));
     document.getElementById('formErrorMsg').classList.remove('show');
 
-    const fields = {
-      full_name: document.getElementById('full_name').value.trim(),
-      age: document.getElementById('age').value,
-      occupation: document.getElementById('occupation').value.trim(),
-      employment_type: document.getElementById('employment_type').value,
-      work_exp: document.getElementById('work_exp').value,
-      monthly_income: document.getElementById('monthly_income').value,
-      housing_status: document.getElementById('housing_status').value,
-      residence_years: document.getElementById('residence_years').value,
-      earning_members: document.getElementById('earning_members').value,
-      loan_purpose: document.getElementById('loan_purpose').value,
+    // ── Build request body matching your FastAPI /score endpoint ──
+    const personal = {
+      name:               document.getElementById('full_name').value.trim(),
+      age:                parseInt(document.getElementById('age').value),
+      occupation:         document.getElementById('occupation').value.trim(),
+      employment_type:    document.getElementById('employment_type').value,
+      experience:         parseFloat(document.getElementById('work_exp').value),
+      monthly_income:     parseFloat(document.getElementById('monthly_income').value),
+      housing_status:     document.getElementById('housing_status').value,
+      years_at_residence: parseFloat(document.getElementById('residence_years').value),
+      earning_members:    parseInt(document.getElementById('earning_members').value),
+      loan_purpose:       document.getElementById('loan_purpose').value,
     };
+
+    const requestBody = {
+      transactions: uploadData.transactions || [],
+      personal:     personal,
+    };
+
     document.getElementById('loading-overlay').classList.add('show');
+
     try {
       const res = await fetch('http://localhost:8000/score', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...fields, ...sessionData })
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(requestBody),
       });
-      if (!res.ok) throw new Error();
+
+      if (!res.ok) throw new Error('Server error');
+
       const data = await res.json();
+
+      if (data.status === 'error') throw new Error(data.message);
+
+      // Save score data for advisor page
       sessionStorage.setItem('finsight_score', JSON.stringify(data));
-      renderInsights(data);
-    } catch {
-      renderInsights(buildDemoData(parseInt(fields.monthly_income) || 50000));
+      sessionStorage.setItem('finsight_categories', JSON.stringify(uploadData.categories || {}));
+
+      renderInsights(data, uploadData.categories || {});
+      showToast('Score generated successfully!', 'success');
+
+    } catch (err) {
+      showToast('Could not connect to server. Check your backend is running.', 'error');
+      console.error(err);
     } finally {
       document.getElementById('loading-overlay').classList.remove('show');
     }
   }
 
-  function buildDemoData(income) {
-    return {
-      score: Math.floor(Math.random() * 200) + 620,
-      categories: {
-        'Food & Dining':     Math.round(income * 0.18),
-        'Transport':         Math.round(income * 0.09),
-        'Shopping':          Math.round(income * 0.14),
-        'Entertainment':     Math.round(income * 0.07),
-        'Utilities & Bills': Math.round(income * 0.06),
-        'Savings':           Math.round(income * 0.22),
-      },
-      loan: {
-        max_amount: Math.round(income * 28 / 1000) * 1000,
-        emi: Math.round(income * 0.34),
-        tenure: '36 months',
-        interest_rate: '10.5% p.a.'
-      }
-    };
-  }
-
-  function renderInsights(data) {
+  function renderInsights(data, categories) {
     document.getElementById('state-form').classList.remove('active');
     document.getElementById('state-insights').classList.add('active');
     document.getElementById('step-pill').textContent = 'Step 2 of 2';
-    renderScore(data.score || 720);
-    renderLine(data.categories || {});
-    renderBudgetArc(data.categories || {});
-    renderLoan(data.loan || {});
+
+    renderScore(data.cibil_score, data.band);
+    renderLine(categories);
+    renderBudgetArc(categories);
+    renderRepayment(data.repayment_capacity);
+    renderBreakdown(data.breakdown);
   }
 
-  /* ── Score ── */
-  function getScoreBand(s) {
-    if (s < 500) return { band:'poor',      label:'Poor'      };
-    if (s < 650) return { band:'fair',      label:'Fair'      };
-    if (s < 780) return { band:'good',      label:'Good'      };
-    return               { band:'excellent', label:'Excellent' };
-  }
-
-  function renderScore(score) {
-    const { band, label } = getScoreBand(score);
+  // ── Score ──
+  function renderScore(score, band) {
     document.getElementById('scoreNum').textContent = score;
+    const bandClass = band.toLowerCase();
     const el = document.getElementById('scoreBand');
-    el.className = `score-band ${band}`;
-    document.getElementById('scoreBandLabel').textContent = label;
+    el.className = `score-band ${bandClass}`;
+    document.getElementById('scoreBandLabel').textContent = band;
   }
 
-  /* ── Line chart ── */
+  // ── Line chart ──
   function renderLine(cats) {
     if (lineInstance) lineInstance.destroy();
     const labels  = Object.keys(cats);
     const values  = Object.values(cats);
+    if (!labels.length) return;
+
     const total   = values.reduce((a, b) => a + b, 0);
     const avg     = Math.round(total / values.length);
     const cumData = values.reduce((acc, v, i) => { acc.push((acc[i-1]||0)+v); return acc; }, []);
+    const topCat  = labels[values.indexOf(Math.max(...values))];
 
     document.getElementById('lineStats').innerHTML = `
       <div class="ls"><div class="lv">₹${total.toLocaleString('en-IN')}</div><div class="ll">Total</div></div>
       <div class="ls"><div class="lv">₹${avg.toLocaleString('en-IN')}</div><div class="ll">Avg/Category</div></div>
-      <div class="ls"><div class="lv">${labels[values.indexOf(Math.max(...values))].split(' ')[0]}</div><div class="ll">Top Category</div></div>`;
+      <div class="ls"><div class="lv">${topCat.split(' ')[0]}</div><div class="ll">Top Category</div></div>`;
 
     const ctx  = document.getElementById('lineChart').getContext('2d');
     const grad = ctx.createLinearGradient(0, 0, 0, 220);
@@ -497,16 +466,10 @@
         labels,
         datasets: [{
           data: cumData,
-          borderColor: '#4DABF7',
-          borderWidth: 2.5,
-          pointBackgroundColor: '#fff',
-          pointBorderColor: '#4DABF7',
-          pointBorderWidth: 2,
-          pointRadius: 5,
-          pointHoverRadius: 7,
-          fill: true,
-          backgroundColor: grad,
-          tension: 0.45,
+          borderColor: '#4DABF7', borderWidth: 2.5,
+          pointBackgroundColor: '#fff', pointBorderColor: '#4DABF7',
+          pointBorderWidth: 2, pointRadius: 5, pointHoverRadius: 7,
+          fill: true, backgroundColor: grad, tension: 0.45,
         }]
       },
       options: {
@@ -514,9 +477,7 @@
         plugins: {
           legend: { display: false },
           tooltip: {
-            backgroundColor: '#1A1D25',
-            titleColor: 'rgba(255,255,255,0.5)',
-            bodyColor: '#fff',
+            backgroundColor: '#1A1D25', titleColor: 'rgba(255,255,255,0.5)', bodyColor: '#fff',
             padding: 13, cornerRadius: 9,
             titleFont: { family: 'Libre Baskerville', size: 11, style: 'italic' },
             bodyFont:  { family: 'Libre Baskerville', size: 13 },
@@ -535,23 +496,23 @@
     });
   }
 
-  /* ── Rainbow arc SVG with hover tooltip ── */
-  const RAINBOW = ['#845EF7','#4DABF7','#F06595','#00C9A7','#FFC107','#FF6B6B'];
+  // ── Rainbow arc ──
+  const RAINBOW = ['#845EF7','#4DABF7','#F06595','#00C9A7','#FFC107','#FF6B6B','#20C997','#FFA94D'];
 
   function renderBudgetArc(cats) {
     const svg    = document.getElementById('budgetSvg');
     const labels = Object.keys(cats);
     const values = Object.values(cats);
-    const total  = values.reduce((a, b) => a + b, 0);
-    const max    = Math.max(...values);
+    if (!labels.length) return;
 
+    const total = values.reduce((a, b) => a + b, 0);
+    const max   = Math.max(...values);
     document.getElementById('arcTotalVal').textContent = '₹' + total.toLocaleString('en-IN');
 
-    const W = 400, cy = 215;
-    const cx = W / 2;
+    const W = 400, cy = 215, cx = W / 2;
     const strokeW = 15, gap = 7, baseR = 38;
-
     let html = '';
+
     labels.forEach((label, i) => {
       const r      = baseR + i * (strokeW + gap);
       const pct    = values[i] / max;
@@ -561,36 +522,22 @@
       const pctOfTotal = ((values[i] / total) * 100).toFixed(1);
       const amt    = '₹' + values[i].toLocaleString('en-IN');
 
-      // track
-      html += `<path d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}"
-        fill="none" stroke="#F0F0F0" stroke-width="${strokeW}" stroke-linecap="round"/>`;
-
-      // active arc
-      html += `<path
-        class="arc-path"
-        d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}"
+      html += `<path d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}" fill="none" stroke="#F0F0F0" stroke-width="${strokeW}" stroke-linecap="round"/>`;
+      html += `<path class="arc-path" d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}"
         fill="none" stroke="${color}" stroke-width="${strokeW}" stroke-linecap="round"
-        stroke-dasharray="${dash} ${arcLen}"
-        stroke-dashoffset="${arcLen}"
-        data-label="${label}"
-        data-amt="${amt}"
-        data-pct="${pctOfTotal}%"
-        data-color="${color}"
-        style="transition: stroke-dashoffset ${0.8 + i*0.15}s cubic-bezier(0.4,0,0.2,1) ${i*0.1}s; cursor:pointer;"
-      />`;
+        stroke-dasharray="${dash} ${arcLen}" stroke-dashoffset="${arcLen}"
+        data-label="${label}" data-amt="${amt}" data-pct="${pctOfTotal}%" data-color="${color}"
+        style="transition: stroke-dashoffset ${0.8+i*0.15}s cubic-bezier(0.4,0,0.2,1) ${i*0.1}s; cursor:pointer;"/>`;
     });
 
     svg.innerHTML = html;
-
-    // animate
     requestAnimationFrame(() => requestAnimationFrame(() => {
       svg.querySelectorAll('.arc-path').forEach(p => { p.style.strokeDashoffset = '0'; });
     }));
 
-    // hover tooltip
     const tooltip = document.getElementById('arcTooltip');
     svg.querySelectorAll('.arc-path').forEach(path => {
-      path.addEventListener('mouseenter', e => {
+      path.addEventListener('mouseenter', () => {
         document.getElementById('ttName').textContent = path.dataset.label;
         document.getElementById('ttAmt').textContent  = path.dataset.amt;
         document.getElementById('ttPct').textContent  = path.dataset.pct + ' of total spend';
@@ -601,31 +548,49 @@
         tooltip.style.left = (e.clientX + 16) + 'px';
         tooltip.style.top  = (e.clientY - 10) + 'px';
       });
-      path.addEventListener('mouseleave', () => {
-        tooltip.style.opacity = '0';
-      });
+      path.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
     });
 
-    // bullet list
     document.getElementById('budgetBullets').innerHTML = labels.map((l, i) => {
       const pct = ((values[i] / total) * 100).toFixed(1);
-      return `
-        <div class="bb-item">
-          <div class="bb-left"><div class="bb-dot" style="background:${RAINBOW[i%RAINBOW.length]}"></div>${l}</div>
-          <div class="bb-right">
-            <span class="bb-amt">₹${values[i].toLocaleString('en-IN')}</span>
-            <span class="bb-pct">${pct}%</span>
-          </div>
-        </div>`;
+      return `<div class="bb-item">
+        <div class="bb-left"><div class="bb-dot" style="background:${RAINBOW[i%RAINBOW.length]}"></div>${l}</div>
+        <div class="bb-right">
+          <span class="bb-amt">₹${values[i].toLocaleString('en-IN')}</span>
+          <span class="bb-pct">${pct}%</span>
+        </div>
+      </div>`;
     }).join('');
   }
 
-  function renderLoan(loan) {
+  // ── Repayment capacity — uses real API data ──
+  function renderRepayment(r) {
+    if (!r) return;
     const fmt = n => '₹' + Number(n).toLocaleString('en-IN');
-    document.getElementById('loanAmount').textContent = loan.max_amount ? fmt(loan.max_amount) : '₹3,20,000';
-    document.getElementById('loanEMI').textContent    = loan.emi        ? fmt(loan.emi)        : '₹11,200';
-    document.getElementById('loanTenure').textContent = loan.tenure     || '36 months';
-    document.getElementById('loanRate').textContent   = loan.interest_rate || '10.5% p.a.';
+    document.getElementById('repayIncome').textContent     = fmt(r.monthly_income);
+    document.getElementById('repaySpent').textContent      = fmt(r.monthly_spending);
+    document.getElementById('repayDisposable').textContent = fmt(r.disposable_income);
+    document.getElementById('repayEMI').textContent        = fmt(r.max_safe_emi);
+    document.getElementById('repayRate').textContent       = r.interest_rate + '% p.a.';
+    document.getElementById('repayRisk').textContent       = r.risk_level;
+  }
+
+  // ── Score breakdown bars ──
+  function renderBreakdown(breakdown) {
+    if (!breakdown) return;
+    const maxDelta = Math.max(...breakdown.map(b => Math.abs(b.delta)));
+
+    document.getElementById('breakdownList').innerHTML = breakdown.map(item => {
+      const isPos  = item.delta >= 0;
+      const width  = Math.round((Math.abs(item.delta) / maxDelta) * 100);
+      const color  = isPos ? '#00C9A7' : '#FF6B6B';
+      const sign   = isPos ? '+' : '';
+      return `<div class="bk-row">
+        <div class="bk-signal">${item.signal}</div>
+        <div class="bk-bar-wrap"><div class="bk-bar" style="width:${width}%;background:${color}"></div></div>
+        <div class="bk-delta ${isPos ? 'pos' : 'neg'}">${sign}${item.delta}</div>
+      </div>`;
+    }).join('');
   }
 </script>
 </body>
