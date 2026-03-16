@@ -40,7 +40,7 @@
     .nav-links a { text-decoration: none; font-size: 0.875rem; color: var(--muted); transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
 
-    /* ── HERO (split layout) ── */
+    /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: grid;
@@ -60,8 +60,6 @@
       background-size: 48px 48px;
       pointer-events: none;
     }
-
-    /* LEFT */
     .hero-left {
       display: flex; flex-direction: column; align-items: flex-start;
       animation: fadeUp 0.7s ease both;
@@ -73,20 +71,17 @@
       padding: 6px 14px; border-radius: 100px; margin-bottom: 1.6rem;
     }
     .hero-tag span { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
-
     h1 {
       font-size: clamp(2rem, 3.5vw, 3rem);
       font-weight: 700; line-height: 1.1; letter-spacing: -0.03em;
       color: var(--card); margin-bottom: 1.2rem;
     }
     h1 em { font-style: italic; color: var(--muted); }
-
     .hero-sub {
       font-size: 1rem; color: var(--muted); line-height: 1.75;
       font-style: italic; max-width: 420px; margin-bottom: 2rem;
     }
     .hero-cta { display: flex; gap: 1rem; margin-bottom: 2.8rem; }
-
     .btn-primary {
       background: var(--card); color: #fff; border: none;
       padding: 13px 26px; font-family: var(--font); font-size: 0.875rem;
@@ -94,7 +89,6 @@
       transition: transform 0.15s, box-shadow 0.15s;
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,29,37,0.18); }
-
     .btn-ghost {
       background: transparent; color: var(--muted);
       border: 1px solid var(--border); padding: 13px 26px;
@@ -103,15 +97,7 @@
       transition: border-color 0.2s, color 0.2s;
     }
     .btn-ghost:hover { border-color: var(--card); color: var(--card); }
-
-    .hero-stats { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .stat-pill { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 10px 18px; }
-    .stat-pill .n { font-size: 1.3rem; font-weight: 700; color: var(--card); line-height: 1; }
-    .stat-pill .l { font-size: 0.7rem; color: var(--muted); margin-top: 3px; letter-spacing: 0.04em; }
-
-    /* RIGHT — upload */
     .hero-right { animation: fadeUp 0.7s 0.15s ease both; }
-
     .upload-label {
       font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--muted); margin-bottom: 0.6rem;
@@ -120,11 +106,10 @@
     .upload-label::before { content: ''; width: 22px; height: 1px; background: var(--muted); }
     .upload-title { font-size: 1.5rem; font-weight: 700; color: var(--card); margin-bottom: 0.3rem; }
     .upload-sub { font-size: 0.85rem; color: var(--muted); font-style: italic; margin-bottom: 1.6rem; }
-
     .drop-zone {
       width: 100%; border: 1.5px dashed #C8C8C8; border-radius: 18px;
       padding: 52px 32px; display: flex; flex-direction: column;
-      align-items: center; gap: 0.9rem; background: #fff;
+      align-items: center; justify-content: center; background: #fff;
       cursor: pointer; text-align: center;
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
     }
@@ -147,7 +132,9 @@
       font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
       padding: 4px 10px; border-radius: 100px;
     }
-
+    #dropContent {
+      display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+    }
     .upload-loader { display: none; flex-direction: column; align-items: center; gap: 0.8rem; }
     .spinner {
       width: 34px; height: 34px;
@@ -155,7 +142,6 @@
       border-radius: 50%; animation: spin 0.8s linear infinite;
     }
     .upload-loader p { font-size: 0.85rem; color: var(--muted); font-style: italic; }
-
     .error-box {
       display: none; margin-top: 1rem;
       background: #FFF5F5; border: 1px solid #FFCDD2;
@@ -164,7 +150,7 @@
     }
     #file-input { display: none; }
 
-    /* ── SECTION LABEL (shared) ── */
+    /* ── SECTION LABEL ── */
     .section-label {
       display: flex; align-items: center; gap: 10px;
       font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -172,45 +158,87 @@
     }
     .section-label::before { content: ''; width: 24px; height: 1px; background: var(--muted); }
 
-    /* ── FLOWCHART ── */
-    #how { padding: 100px 6%; max-width: 1100px; margin: 0 auto; }
+    /* ── HOW + FAQ SIDE BY SIDE ── */
+    .how-faq-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* ── THREE STEPS ── */
+    #how { padding: 100px 6%; }
     #how h2 {
       font-size: clamp(1.6rem, 2.8vw, 2.2rem);
       font-weight: 700; color: var(--card); letter-spacing: -0.02em; margin-bottom: 3rem;
     }
     #how h2 em { font-style: italic; color: var(--muted); }
-
-    .steps {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 0; position: relative;
+    .steps { display: flex; flex-direction: column; max-width: 560px; }
+    .step {
+      display: flex; flex-direction: row; align-items: flex-start;
+      gap: 1.4rem; padding: 0 0 2.4rem 0;
     }
-    .steps::before {
-      content: '';
-      position: absolute;
-      top: 22px; left: calc(16.67% + 22px); right: calc(16.67% + 22px);
-      height: 1px; background: var(--border); z-index: 0;
-    }
-    .step { display: flex; flex-direction: column; padding: 0 2rem 0 0; position: relative; z-index: 1; }
+    .step:last-child { padding-bottom: 0; }
     .step-num {
-      width: 44px; height: 44px; border-radius: 50%;
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
       background: #fff; border: 1.5px solid var(--border);
       display: flex; align-items: center; justify-content: center;
       font-size: 0.72rem; font-weight: 700; color: var(--muted);
-      margin-bottom: 1.4rem;
       transition: background 0.25s, border-color 0.25s, color 0.25s;
     }
     .step:hover .step-num { background: var(--card); border-color: var(--card); color: var(--accent); }
+    .step-body { padding-top: 10px; }
     .step-title { font-size: 0.95rem; font-weight: 700; color: var(--card); margin-bottom: 0.4rem; }
     .step-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.7; font-style: italic; }
 
+    /* ── FAQ ── */
+    #faq { padding: 100px 6%; background: var(--bg); }
+    .faq-inner { display: flex; flex-direction: column; gap: 2rem; }
+    #faq h2 {
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-weight: 700; color: var(--card); letter-spacing: -0.02em;
+      line-height: 1.2; margin-bottom: 1rem;
+    }
+    #faq h2 em { font-style: italic; color: var(--muted); }
+    .faq-left-sub {
+      font-size: 0.88rem; color: var(--muted);
+      font-style: italic; line-height: 1.75; margin-bottom: 2rem;
+    }
+    .faq-contact {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.8rem; color: var(--card); text-decoration: none;
+      font-style: italic; border-bottom: 1px solid rgba(26,29,37,0.2);
+      padding-bottom: 2px; transition: border-color 0.2s;
+    }
+    .faq-contact:hover { border-color: var(--card); }
+    .faq-contact svg { width: 13px; height: 13px; stroke: var(--card); fill: none; stroke-width: 2; }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      width: 100%; background: none; border: none;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: 20px 0; cursor: pointer;
+      text-align: left; font-family: var(--font);
+    }
+    .faq-q-text { font-size: 0.9rem; font-weight: 700; color: var(--card); transition: color 0.2s; }
+    .faq-item.open .faq-q-text { color: var(--accent); }
+    .faq-icon {
+      width: 28px; height: 28px; flex-shrink: 0;
+      border: 1px solid var(--border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s, transform 0.3s;
+    }
+    .faq-icon svg { width: 12px; height: 12px; stroke: var(--muted); fill: none; stroke-width: 2.5; transition: stroke 0.2s; }
+    .faq-item.open .faq-icon { background: rgba(77,171,247,0.1); border-color: rgba(77,171,247,0.3); transform: rotate(45deg); }
+    .faq-item.open .faq-icon svg { stroke: var(--accent); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-a-inner { font-size: 0.84rem; color: var(--muted); font-style: italic; line-height: 1.75; padding-bottom: 20px; }
+    .faq-a-inner strong { color: var(--text); font-style: normal; }
+    .faq-item.open .faq-a { max-height: 300px; }
+
     /* ── ABOUT ── */
     #about { padding: 100px 6%; background: var(--card); color: #fff; }
-    .about-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: center;
-    }
-    #about .section-label { color: rgba(255,255,255,0.35); }
+    .about-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    #about .section-label { color: rgba(255,255,255,0.35); justify-content: center; }
     #about .section-label::before { background: rgba(255,255,255,0.25); }
     #about h2 {
       font-size: clamp(1.6rem, 2.8vw, 2.2rem);
@@ -219,22 +247,6 @@
     }
     #about h2 em { color: var(--accent); font-style: italic; }
     #about p { font-size: 0.92rem; color: rgba(255,255,255,0.5); line-height: 1.75; font-style: italic; margin-bottom: 0.9rem; }
-
-    .about-features { display: flex; flex-direction: column; gap: 1rem; }
-    .af {
-      display: flex; align-items: flex-start; gap: 1rem;
-      padding: 16px 18px; border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 10px; transition: border-color 0.2s, background 0.2s;
-    }
-    .af:hover { border-color: rgba(77,171,247,0.3); background: rgba(77,171,247,0.04); }
-    .af-icon {
-      width: 34px; height: 34px; min-width: 34px;
-      background: rgba(255,255,255,0.06); border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .af-icon svg { width: 15px; height: 15px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
-    .af h4 { font-size: 0.875rem; color: #fff; margin-bottom: 3px; }
-    .af p { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin: 0; font-style: italic; }
 
     /* ── FOOTER ── */
     footer {
@@ -252,11 +264,7 @@
 
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: 1fr; }
-      .steps::before { display: none; }
-      .step { flex-direction: row; gap: 1.2rem; padding: 0 0 2rem 0; align-items: flex-start; }
-      .step-num { margin-bottom: 0; flex-shrink: 0; }
-      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .how-faq-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -271,7 +279,7 @@
         <path d="M5.5 10.5 H12.5" stroke="#4DABF7" stroke-width="1.8" stroke-linecap="round"/>
       </svg>
     </div>
-    <span class="nav-logo-text">FinSight</span>
+    <span class="nav-logo-text">FinCred</span>
   </a>
   <ul class="nav-links">
     <li><a href="#">Home</a></li>
@@ -281,30 +289,19 @@
 
 <!-- HERO -->
 <section class="hero" id="upload">
-
-  <!-- LEFT: copy + stats -->
   <div class="hero-left">
     <div class="hero-tag"><span></span> Credit Intelligence</div>
     <h1>190M+ Credit<br>Invisible <em>Indians.</em></h1>
-    <p class="hero-sub">Upload your PhonePe or Axis Bank statement and receive an intelligent credit score analysis in seconds.</p>
+    <p class="hero-sub">Transform your bank and UPI transactions into a powerful credit profile.</p>
     <div class="hero-cta">
       <a href="#upload" class="btn-primary">Analyse My Statement</a>
       <a href="#how" class="btn-ghost">How it works</a>
     </div>
-    <div class="hero-stats">
-      <div class="stat-pill"><div class="n">98%</div><div class="l">Accuracy Rate</div></div>
-      <div class="stat-pill"><div class="n">&lt;5s</div><div class="l">Analysis Time</div></div>
-      <div class="stat-pill"><div class="n">2</div><div class="l">Banks Supported</div></div>
-      <div class="stat-pill"><div class="n">256-bit</div><div class="l">SSL Encryption</div></div>
-    </div>
   </div>
-
-  <!-- RIGHT: drop zone -->
   <div class="hero-right">
     <div class="upload-label">Upload</div>
     <div class="upload-title">Drop your statement</div>
-    <p class="upload-sub">Supports PhonePe &amp; Axis Bank PDFs · Private &amp; secure</p>
-
+    <p class="upload-sub">Supports PhonePe &amp; Axis Bank PDFs</p>
     <div class="drop-zone" id="dropZone">
       <div id="dropContent">
         <div class="drop-icon">
@@ -315,7 +312,7 @@
         <div class="drop-badges">
           <span class="badge">PhonePe</span>
           <span class="badge">Axis Bank</span>
-          <span class="badge">PDF only</span>
+          <span class="badge">PDF </span>
         </div>
       </div>
       <div class="upload-loader" id="uploadLoader">
@@ -326,69 +323,148 @@
     <div class="error-box" id="errorBox">⚠ Invalid statement. Please upload a PhonePe or Axis Bank PDF.</div>
     <input type="file" id="file-input" accept=".pdf"/>
   </div>
-
 </section>
 
-<!-- FLOWCHART -->
-<section id="how">
-  <div class="section-label">Process</div>
-  <h2>Three steps to your <em>credit picture</em></h2>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-title">Upload Statement</div>
-      <p class="step-desc">Drag and drop your PhonePe or Axis Bank PDF. We handle password-protected files too.</p>
+<!-- HOW + FAQ SIDE BY SIDE -->
+<div class="how-faq-row">
+
+  <section id="how">
+    <div class="section-label">Process</div>
+    <h2>Three steps to your <em>credit picture</em></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <div class="step-title">Upload Statement</div>
+          <p class="step-desc">Drag and drop your PhonePe or Axis Bank PDF. We handle password-protected files too.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <div class="step-title">Analysing Your Data</div>
+          <p class="step-desc">On reading your statement, our system identifies spending patterns and extracts the financial signals lenders care about.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <div class="step-title">View Your Score</div>
+          <p class="step-desc">Receive a credit score with categorised insights with actionable recommendations — in seconds.</p>
+        </div>
+      </div>
     </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-title">AI Parses Your Data</div>
-      <p class="step-desc">Our engine reads transactions, identifies spending patterns, and extracts the financial signals lenders care about.</p>
+  </section>
+
+  <section id="faq">
+    <div class="faq-inner">
+      <div>
+        <div class="section-label">Questions</div>
+        <h2>Got a question? <em>We've got you.</em></h2>
+        <p class="faq-left-sub">Everything you need to know about how FinCred works, what we do with your data, and how we differ from a traditional CIBIL check.</p>
+        <a href="mailto:hello@finsight.in" class="faq-contact">
+          Still confused? Drop us a note
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Is my bank statement data safe?</span>
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a" role="region">
+            <p class="faq-a-inner">Absolutely. Your PDF is <strong>processed entirely in your browser</strong> and is never uploaded to or stored on our servers. Once you close the tab, it's gone.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">How is this different from checking my CIBIL score?</span>
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a" role="region">
+            <p class="faq-a-inner">CIBIL only looks at your <strong>past credit behaviour</strong> — loans, credit cards, defaults. If you don't have that history, you're invisible to them. FinCred looks at your <strong>actual money movement</strong> — income, spending patterns, savings behaviour — and builds a picture even if you've never taken a loan.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Which bank statements do you support?</span>
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a" role="region">
+            <p class="faq-a-inner">Right now we support <strong>PhonePe statements</strong> and <strong>Axis Bank PDFs</strong>. We're actively working on adding HDFC, SBI, and ICICI. If your bank isn't listed yet, <a href="mailto:hello@finsight.in" style="color:var(--accent)">let us know</a> and we'll prioritise it.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Will this affect my actual CIBIL score?</span>
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a" role="region">
+            <p class="faq-a-inner">Not at all. FinSight performs a <strong>soft analysis</strong> of your own document — we don't query any credit bureau and don't make any hard inquiries. Your CIBIL score is completely unaffected.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">What does the score actually measure?</span>
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a" role="region">
+            <p class="faq-a-inner">We look at <strong>five key signals</strong>: income regularity, spending volatility, savings ratio, EMI-like recurring payments, and balance consistency. Together what lenders informally check when reviewing informal borrowers.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Is FinSight free to use?</span>
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a" role="region">
+            <p class="faq-a-inner">Yes — completely free during our early access period. No sign-up, no credit card, no catch. We believe everyone deserves to understand their financial health before a lender does.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-title">View Your Score</div>
-      <p class="step-desc">Receive a credit score with categorised insights, risk factors, and actionable recommendations — in seconds.</p>
-    </div>
-  </div>
-</section>
+  </section>
+
+</div>
 
 <!-- ABOUT -->
 <section id="about">
   <div class="about-inner">
-    <div>
-      <div class="section-label">About FinSight</div>
-      <h2>Credit intelligence for the <em>modern borrower</em></h2>
-      <p>FinSight was built for a simple reason — banks have always known more about your money than you do. We change that.</p>
-      <p>By parsing your own bank statements, we surface the signals lenders look for, and put that clarity in your hands before anyone else sees it.</p>
-    </div>
-    <div class="about-features">
-      <div class="af">
-        <div class="af-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div><h4>Privacy First</h4><p>Your PDF is processed in-memory and never stored on our servers.</p></div>
-      </div>
-      <div class="af">
-        <div class="af-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <div><h4>Instant Dashboard</h4><p>Scores, category breakdowns, and risk factors rendered in real time.</p></div>
-      </div>
-      <div class="af">
-        <div class="af-icon"><svg viewBox="0 0 24 24"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div>
-        <div><h4>Lender-Grade Analysis</h4><p>The same signals banks use — income regularity, utilisation, volatility.</p></div>
-      </div>
-    </div>
+    <div class="section-label">About FinCred</div>
+    <h2>Credit insights for the <em>next generation</em></h2>
+    <p>FinCred aims to promote financial inclusion by helping credit invisible individuals build their digital financial identity and gain access to fair credit opportunities.</p>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <strong>FinSight</strong> &mdash; Credit Intelligence Platform &nbsp;·&nbsp; &copy; 2025. All rights reserved.
+  <strong>FinCred</strong> &mdash; Credit Intelligence Platform &nbsp;·&nbsp; &copy; 2026. All rights reserved.
 </footer>
 
 <script>
-  const dropZone    = document.getElementById('dropZone');
-  const fileInput   = document.getElementById('file-input');
-  const dropContent = document.getElementById('dropContent');
+  /* ── FAQ accordion ── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ── File upload ── */
+  const dropZone     = document.getElementById('dropZone');
+  const fileInput    = document.getElementById('file-input');
+  const dropContent  = document.getElementById('dropContent');
   const uploadLoader = document.getElementById('uploadLoader');
-  const errorBox    = document.getElementById('errorBox');
+  const errorBox     = document.getElementById('errorBox');
 
   dropZone.addEventListener('click', () => fileInput.click());
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
@@ -421,7 +497,6 @@
       showError();
     }
   }
-
   function showError() {
     errorBox.style.display = 'block';
     dropContent.style.display = 'flex';
