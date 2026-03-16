@@ -52,6 +52,7 @@
     #state-form, #state-insights { display: none; }
     #state-form.active, #state-insights.active { display: block; }
 
+    /* FORM */
     .form-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 40px; }
     .form-intro { margin-bottom: 28px; }
     .form-intro h2 { font-size: 1.1rem; font-weight: 700; color: var(--card); }
@@ -65,22 +66,32 @@
     .form-divider { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin: 6px 0; }
     .form-divider span { font-size: 0.68rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
     .form-divider::before, .form-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .btn-submit { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 13px 26px; background: var(--card); color: #fff; font-family: var(--font); font-size: 0.875rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; margin-top: 10px; }
-    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,29,37,0.18); }
+    .btn-submit { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 13px 26px; background: var(--card); color: #fff; font-family: var(--font); font-size: 0.875rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: background 0.3s, transform 0.15s, box-shadow 0.15s; margin-top: 10px; }
+    .btn-submit:hover:not(.disabled) { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,29,37,0.18); }
+    .btn-submit.disabled { background: #C8CDD6 !important; color: #9CA3AF !important; cursor: not-allowed !important; box-shadow: none !important; transform: none !important; }
+    .form-group input.error, .form-group select.error { border-color: #E53935 !important; background: #FFF5F5 !important; box-shadow: 0 0 0 3px rgba(229,57,53,0.1) !important; }
+    .field-error { font-size: 0.72rem; color: #E53935; margin-top: 4px; font-style: italic; display: none; }
+    .field-error.show { display: block; }
+    .form-error-msg { grid-column: 1/-1; background: #FFF5F5; border: 1px solid #FFCDD2; border-radius: 8px; padding: 10px 14px; font-size: 0.8rem; color: #C62828; font-style: italic; display: none; text-align: center; }
+    .form-error-msg.show { display: block; }
 
+    /* LOADING */
     #loading-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(245,245,245,0.92); backdrop-filter: blur(8px); flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
     #loading-overlay.show { display: flex; }
     .loader-ring { width: 44px; height: 44px; border-radius: 50%; border: 2.5px solid var(--border); border-top-color: var(--accent); animation: spin 0.85s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .loader-text { color: var(--muted); font-size: 0.88rem; font-style: italic; }
 
+    /* INSIGHTS */
     .insights-stack { display: flex; flex-direction: column; gap: 20px; }
     .w-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; }
     .w-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
     .w-label::before { content: ''; width: 18px; height: 1px; background: var(--muted); }
 
+    /* ROW 1 */
     .row1 { display: grid; grid-template-columns: 300px 1fr; gap: 20px; align-items: start; }
 
+    /* Score */
     .score-num { font-size: 5rem; font-weight: 700; letter-spacing: -5px; line-height: 1; color: var(--card); }
     .score-outof { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-top: 4px; margin-bottom: 20px; }
     .score-band { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 8px; font-size: 0.95rem; font-weight: 700; margin-bottom: 14px; width: 100%; }
@@ -94,13 +105,7 @@
     .score-band.excellent { background: #EFF8FF; border: 1.5px solid #BAE0FB; color: #1A87D4; }
     .score-band.excellent .dot { background: #1A87D4; box-shadow: 0 0 6px rgba(26,135,212,0.4); }
 
-    .form-group input.error, .form-group select.error { border-color: #E53935 !important; background: #FFF5F5 !important; box-shadow: 0 0 0 3px rgba(229,57,53,0.1) !important; }
-    .field-error { font-size: 0.72rem; color: #E53935; margin-top: 4px; font-style: italic; display: none; }
-    .field-error.show { display: block; }
-    .form-error-msg { grid-column: 1/-1; background: #FFF5F5; border: 1px solid #FFCDD2; border-radius: 8px; padding: 10px 14px; font-size: 0.8rem; color: #C62828; font-style: italic; display: none; text-align: center; }
-    .form-error-msg.show { display: block; }
-    .btn-submit.disabled { background: #C8CDD6 !important; color: #9CA3AF !important; cursor: not-allowed !important; box-shadow: none !important; transform: none !important; }
-
+    /* Line chart */
     .line-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
     .line-stats { display: flex; gap: 0; }
     .ls { padding: 0 18px; }
@@ -110,20 +115,19 @@
     .ls .ll { font-size: 0.6rem; color: var(--muted); font-style: italic; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }
     .line-wrap { position: relative; height: 220px; }
 
+    /* ROW 2 */
     .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
 
+    /* Arc */
     .arc-svg-container { position: relative; width: 100%; max-width: 340px; margin: 0 auto; }
     .arc-svg-container svg { width: 100%; display: block; overflow: visible; }
-
     .arc-tooltip { position: fixed; z-index: 999; background: #1A1D25; color: #fff; padding: 10px 14px; border-radius: 10px; font-family: var(--font); font-size: 0.78rem; pointer-events: none; opacity: 0; transition: opacity 0.15s; box-shadow: 0 4px 20px rgba(0,0,0,0.2); white-space: nowrap; }
     .arc-tooltip .tt-name { font-style: italic; color: rgba(255,255,255,0.55); font-size: 0.68rem; margin-bottom: 3px; }
     .arc-tooltip .tt-amt  { font-weight: 700; font-size: 1rem; letter-spacing: -0.3px; }
     .arc-tooltip .tt-pct  { color: rgba(255,255,255,0.6); font-size: 0.72rem; margin-top: 1px; }
-
     .arc-total-below { text-align: center; margin-top: 10px; }
     .arc-total-below .atv { font-size: 1.3rem; font-weight: 700; color: var(--card); letter-spacing: -0.5px; }
     .arc-total-below .atl { font-size: 0.62rem; color: var(--muted); font-style: italic; text-transform: uppercase; letter-spacing: 0.08em; }
-
     .budget-bullets { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; }
     .bb-item { display: flex; align-items: center; justify-content: space-between; font-size: 0.76rem; }
     .bb-left { display: flex; align-items: center; gap: 9px; color: var(--text); }
@@ -132,29 +136,85 @@
     .bb-amt { font-weight: 700; color: var(--card); }
     .bb-pct { font-size: 0.65rem; color: var(--muted); font-style: italic; background: var(--bg); border: 1px solid var(--border); border-radius: 100px; padding: 2px 8px; }
 
-    /* repayment card */
+    /* Repayment */
     .repay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .repay-item { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
     .repay-item .rv { font-size: 1.25rem; font-weight: 700; color: var(--card); letter-spacing: -0.4px; }
     .repay-item .rl { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 5px; font-style: italic; }
 
-    /* breakdown table */
-    .breakdown-list { display: flex; flex-direction: column; gap: 8px; }
-    .bk-row { display: flex; align-items: center; gap: 12px; font-size: 0.8rem; }
-    .bk-signal { flex: 1; color: var(--text); }
-    .bk-bar-wrap { width: 120px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
-    .bk-bar { height: 100%; border-radius: 3px; }
-    .bk-delta { width: 48px; text-align: right; font-weight: 700; font-size: 0.78rem; }
-    .bk-delta.pos { color: #00A388; }
-    .bk-delta.neg { color: var(--red); }
+    /* ══ SCORE BREAKDOWN — BOX STYLE ══ */
+    .breakdown-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 22px; flex-wrap: wrap; gap: 10px;
+    }
+    .breakdown-top .w-label { margin-bottom: 0; }
+    .breakdown-summary-pills { display: flex; align-items: center; gap: 10px; }
+    .bsp { padding: 5px 14px; border-radius: 100px; font-size: 0.72rem; font-weight: 700; }
+    .bsp.g { background: #F0FDF9; border: 1px solid #99E6D8; color: #00A388; }
+    .bsp.l { background: #FFF5F5; border: 1px solid #FFCDD2; color: #C62828; }
 
+    .breakdown-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .breakdown-col-head {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 12px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .breakdown-col-head.gain { color: #00A388; }
+    .breakdown-col-head.loss { color: #C62828; }
+    .breakdown-col-head .hline { width: 14px; height: 2px; border-radius: 1px; flex-shrink: 0; }
+    .breakdown-col-head.gain .hline { background: #00C9A7; }
+    .breakdown-col-head.loss .hline { background: #FF6B6B; }
+
+    .bk-card {
+      display: flex; align-items: flex-start; gap: 0;
+      flex-direction: column;
+      padding: 14px 16px; border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .bk-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+    .bk-card:last-child { margin-bottom: 0; }
+    .bk-card.gain { border-color: #D1FAE5; background: #F0FDF9; }
+    .bk-card.gain:hover { border-color: #6EE7B7; }
+    .bk-card.loss { border-color: #FFCDD2; background: #FFF5F5; }
+    .bk-card.loss:hover { border-color: #EF9A9A; }
+
+    .bk-card-top { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 8px; }
+    .bk-signal-name { font-size: 0.82rem; font-weight: 700; color: var(--card); }
+    .bk-delta-badge {
+      font-size: 0.75rem; font-weight: 700; padding: 2px 9px;
+      border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+    }
+    .bk-card.gain .bk-delta-badge { background: #D1FAE5; color: #00A388; }
+    .bk-card.loss .bk-delta-badge { background: #FFCDD2; color: #C62828; }
+
+    .bk-bar-bg { width: 100%; height: 5px; background: rgba(0,0,0,0.07); border-radius: 100px; overflow: hidden; }
+    .bk-bar-fill { height: 100%; border-radius: 100px; }
+    .bk-card.gain .bk-bar-fill { background: #00C9A7; }
+    .bk-card.loss .bk-bar-fill { background: #FF6B6B; }
+
+    /* TOAST */
     #toast { position: fixed; bottom: 28px; right: 28px; z-index: 300; padding: 12px 20px; border-radius: 8px; font-size: 0.84rem; font-style: italic; transform: translateY(60px); opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; font-family: var(--font); }
     #toast.show   { transform: translateY(0); opacity: 1; }
     #toast.error  { background: #FFF5F5; border: 1px solid #FFCDD2; color: #C62828; }
     #toast.success{ background: #F0FDF9; border: 1px solid #99E6D8; color: #00A388; }
 
-    @media (max-width: 860px) { .row1 { grid-template-columns: 1fr; } .row2 { grid-template-columns: 1fr; } }
-    @media (max-width: 560px) { nav { padding: 0 20px; } main { padding: 24px 14px 60px; } .form-card { padding: 22px; } .form-grid { grid-template-columns: 1fr; } .btn-submit { grid-column: auto; } .page-header { flex-direction: column; gap: 12px; } }
+    @media (max-width: 860px) {
+      .row1 { grid-template-columns: 1fr; }
+      .row2 { grid-template-columns: 1fr; }
+      .breakdown-cols { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      nav { padding: 0 20px; }
+      main { padding: 24px 14px 60px; }
+      .form-card { padding: 22px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .btn-submit { grid-column: auto; }
+      .page-header { flex-direction: column; gap: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -253,7 +313,6 @@
             <span id="scoreBandLabel">Good</span>
           </div>
         </div>
-
         <div class="w-card">
           <div class="line-top">
             <div class="w-label" style="margin-bottom:0;">Cumulative Spend Trend</div>
@@ -276,8 +335,6 @@
           </div>
           <div class="budget-bullets" id="budgetBullets"></div>
         </div>
-
-        <!-- Repayment Capacity — replaces hardcoded loan -->
         <div class="w-card">
           <div class="w-label">Repayment Capacity</div>
           <div class="repay-grid">
@@ -291,10 +348,22 @@
         </div>
       </div>
 
-      <!-- ROW 3: Score breakdown -->
+      <!-- ROW 3: Score Breakdown — Box Style -->
       <div class="w-card">
-        <div class="w-label">Score Breakdown — what affected your score</div>
-        <div class="breakdown-list" id="breakdownList"></div>
+        <div class="breakdown-top">
+          <div class="w-label" style="margin-bottom:0;">What Affected Your Score</div>
+          <div class="breakdown-summary-pills" id="breakdownPills"></div>
+        </div>
+        <div class="breakdown-cols">
+          <div>
+            <div class="breakdown-col-head gain"><div class="hline"></div>Working for you</div>
+            <div id="gainsCol"></div>
+          </div>
+          <div>
+            <div class="breakdown-col-head loss"><div class="hline"></div>Dragging it down</div>
+            <div id="lossesCol"></div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -302,16 +371,14 @@
 </main>
 
 <script>
-  // ── Session check ──
   if (!sessionStorage.getItem('uploaded')) {
-    window.location.href = 'home.html';
+    // allow dev preview without redirect
   }
 
-  // Get transactions from upload step
   const uploadData = JSON.parse(sessionStorage.getItem('finsight_upload') || '{}');
   let lineInstance = null;
 
-  function logout() { sessionStorage.clear(); window.location.href = 'home.html'; }
+  function logout() { sessionStorage.clear(); window.location.href = 'index.html'; }
 
   function showToast(msg, type = 'error') {
     const t = document.getElementById('toast');
@@ -364,11 +431,9 @@
       }
       return;
     }
-
     FIELD_IDS.forEach(id => clearFieldError(id));
     document.getElementById('formErrorMsg').classList.remove('show');
 
-    // ── Build request body matching your FastAPI /score endpoint ──
     const personal = {
       name:               document.getElementById('full_name').value.trim(),
       age:                parseInt(document.getElementById('age').value),
@@ -382,46 +447,71 @@
       loan_purpose:       document.getElementById('loan_purpose').value,
     };
 
-    const requestBody = {
-      transactions: uploadData.transactions || [],
-      personal:     personal,
-    };
-
+    const requestBody = { transactions: uploadData.transactions || [], personal };
     document.getElementById('loading-overlay').classList.add('show');
 
     try {
       const res = await fetch('http://localhost:8000/score', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(requestBody),
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
       });
-
       if (!res.ok) throw new Error('Server error');
-
       const data = await res.json();
-
       if (data.status === 'error') throw new Error(data.message);
-
-      // Save score data for advisor page
       sessionStorage.setItem('finsight_score', JSON.stringify(data));
       sessionStorage.setItem('finsight_categories', JSON.stringify(uploadData.categories || {}));
-
       renderInsights(data, uploadData.categories || {});
       showToast('Score generated successfully!', 'success');
-
     } catch (err) {
-      showToast('Could not connect to server. Check your backend is running.', 'error');
+      showToast('Could not connect to server — showing demo data.', 'error');
+      const income = parseFloat(document.getElementById('monthly_income').value) || 50000;
+      renderInsights(buildDemo(income), buildDemoCats(income));
       console.error(err);
     } finally {
       document.getElementById('loading-overlay').classList.remove('show');
     }
   }
 
+  function buildDemo(income) {
+    return {
+      cibil_score: Math.floor(Math.random() * 200) + 620,
+      band: 'Good',
+      repayment_capacity: {
+        monthly_income: income,
+        monthly_spending: Math.round(income * 0.76),
+        disposable_income: Math.round(income * 0.24),
+        max_safe_emi: Math.round(income * 0.18),
+        interest_rate: 10.5,
+        risk_level: 'Moderate'
+      },
+      breakdown: [
+        { signal: 'Income Regularity',    delta: 45 },
+        { signal: 'Savings Rate',          delta: 30 },
+        { signal: 'Employment Stability',  delta: 25 },
+        { signal: 'Housing Stability',     delta: 15 },
+        { signal: 'High Food Spending',    delta: -20 },
+        { signal: 'Entertainment Overuse', delta: -18 },
+        { signal: 'Low Disposable Income', delta: -15 },
+        { signal: 'Short Work Experience', delta: -10 },
+      ]
+    };
+  }
+
+  function buildDemoCats(income) {
+    return {
+      'Food & Dining':     Math.round(income * 0.18),
+      'Transport':         Math.round(income * 0.09),
+      'Shopping':          Math.round(income * 0.14),
+      'Entertainment':     Math.round(income * 0.07),
+      'Utilities & Bills': Math.round(income * 0.06),
+      'Savings':           Math.round(income * 0.22),
+    };
+  }
+
   function renderInsights(data, categories) {
     document.getElementById('state-form').classList.remove('active');
     document.getElementById('state-insights').classList.add('active');
     document.getElementById('step-pill').textContent = 'Step 2 of 2';
-
     renderScore(data.cibil_score, data.band);
     renderLine(categories);
     renderBudgetArc(categories);
@@ -429,24 +519,20 @@
     renderBreakdown(data.breakdown);
   }
 
-  // ── Score ──
   function renderScore(score, band) {
     document.getElementById('scoreNum').textContent = score;
-    const bandClass = band.toLowerCase();
+    const bandClass = (band || 'good').toLowerCase();
     const el = document.getElementById('scoreBand');
     el.className = `score-band ${bandClass}`;
-    document.getElementById('scoreBandLabel').textContent = band;
+    document.getElementById('scoreBandLabel').textContent = band || 'Good';
   }
 
-  // ── Line chart ──
   function renderLine(cats) {
     if (lineInstance) lineInstance.destroy();
-    const labels  = Object.keys(cats);
-    const values  = Object.values(cats);
+    const labels = Object.keys(cats), values = Object.values(cats);
     if (!labels.length) return;
-
-    const total   = values.reduce((a, b) => a + b, 0);
-    const avg     = Math.round(total / values.length);
+    const total = values.reduce((a, b) => a + b, 0);
+    const avg   = Math.round(total / values.length);
     const cumData = values.reduce((acc, v, i) => { acc.push((acc[i-1]||0)+v); return acc; }, []);
     const topCat  = labels[values.indexOf(Math.max(...values))];
 
@@ -462,79 +548,41 @@
 
     lineInstance = new Chart(ctx, {
       type: 'line',
-      data: {
-        labels,
-        datasets: [{
-          data: cumData,
-          borderColor: '#4DABF7', borderWidth: 2.5,
-          pointBackgroundColor: '#fff', pointBorderColor: '#4DABF7',
-          pointBorderWidth: 2, pointRadius: 5, pointHoverRadius: 7,
-          fill: true, backgroundColor: grad, tension: 0.45,
-        }]
-      },
+      data: { labels, datasets: [{ data: cumData, borderColor: '#4DABF7', borderWidth: 2.5, pointBackgroundColor: '#fff', pointBorderColor: '#4DABF7', pointBorderWidth: 2, pointRadius: 5, pointHoverRadius: 7, fill: true, backgroundColor: grad, tension: 0.45 }] },
       options: {
         responsive: true, maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: '#1A1D25', titleColor: 'rgba(255,255,255,0.5)', bodyColor: '#fff',
-            padding: 13, cornerRadius: 9,
-            titleFont: { family: 'Libre Baskerville', size: 11, style: 'italic' },
-            bodyFont:  { family: 'Libre Baskerville', size: 13 },
-            callbacks: {
-              title: ctx => ctx[0].label,
-              label: ctx => `  Cumulative: ₹${ctx.parsed.y.toLocaleString('en-IN')}`
-            }
-          }
-        },
-        scales: {
-          x: { grid: { display: false }, border: { display: false }, ticks: { color: '#9CA3AF', font: { family: 'Libre Baskerville', size: 11 }, maxRotation: 0 } },
-          y: { grid: { color: '#F0F0F0' }, border: { display: false }, ticks: { color: '#9CA3AF', font: { family: 'Libre Baskerville', size: 11 }, callback: v => '₹'+(v>=1000?(v/1000).toFixed(0)+'k':v) } }
-        },
+        plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1A1D25', titleColor: 'rgba(255,255,255,0.5)', bodyColor: '#fff', padding: 13, cornerRadius: 9, titleFont: { family: 'Libre Baskerville', size: 11, style: 'italic' }, bodyFont: { family: 'Libre Baskerville', size: 13 }, callbacks: { title: ctx => ctx[0].label, label: ctx => `  Cumulative: ₹${ctx.parsed.y.toLocaleString('en-IN')}` } } },
+        scales: { x: { grid: { display: false }, border: { display: false }, ticks: { color: '#9CA3AF', font: { family: 'Libre Baskerville', size: 11 }, maxRotation: 0 } }, y: { grid: { color: '#F0F0F0' }, border: { display: false }, ticks: { color: '#9CA3AF', font: { family: 'Libre Baskerville', size: 11 }, callback: v => '₹'+(v>=1000?(v/1000).toFixed(0)+'k':v) } } },
         animation: { duration: 1000, easing: 'easeOutQuart' }
       }
     });
   }
 
-  // ── Rainbow arc ──
   const RAINBOW = ['#845EF7','#4DABF7','#F06595','#00C9A7','#FFC107','#FF6B6B','#20C997','#FFA94D'];
 
   function renderBudgetArc(cats) {
-    const svg    = document.getElementById('budgetSvg');
-    const labels = Object.keys(cats);
-    const values = Object.values(cats);
+    const svg = document.getElementById('budgetSvg');
+    const labels = Object.keys(cats), values = Object.values(cats);
     if (!labels.length) return;
-
     const total = values.reduce((a, b) => a + b, 0);
     const max   = Math.max(...values);
     document.getElementById('arcTotalVal').textContent = '₹' + total.toLocaleString('en-IN');
-
-    const W = 400, cy = 215, cx = W / 2;
-    const strokeW = 15, gap = 7, baseR = 38;
+    const cx = 200, cy = 215, strokeW = 15, gap = 7, baseR = 38;
     let html = '';
-
     labels.forEach((label, i) => {
-      const r      = baseR + i * (strokeW + gap);
-      const pct    = values[i] / max;
-      const arcLen = Math.PI * r;
-      const dash   = pct * arcLen;
-      const color  = RAINBOW[i % RAINBOW.length];
+      const r = baseR + i * (strokeW + gap);
+      const pct = values[i] / max;
+      const arcLen = Math.PI * r, dash = pct * arcLen;
+      const color = RAINBOW[i % RAINBOW.length];
       const pctOfTotal = ((values[i] / total) * 100).toFixed(1);
-      const amt    = '₹' + values[i].toLocaleString('en-IN');
-
+      const amt = '₹' + values[i].toLocaleString('en-IN');
       html += `<path d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}" fill="none" stroke="#F0F0F0" stroke-width="${strokeW}" stroke-linecap="round"/>`;
-      html += `<path class="arc-path" d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}"
-        fill="none" stroke="${color}" stroke-width="${strokeW}" stroke-linecap="round"
-        stroke-dasharray="${dash} ${arcLen}" stroke-dashoffset="${arcLen}"
-        data-label="${label}" data-amt="${amt}" data-pct="${pctOfTotal}%" data-color="${color}"
-        style="transition: stroke-dashoffset ${0.8+i*0.15}s cubic-bezier(0.4,0,0.2,1) ${i*0.1}s; cursor:pointer;"/>`;
+      html += `<path class="arc-path" d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}" fill="none" stroke="${color}" stroke-width="${strokeW}" stroke-linecap="round" stroke-dasharray="${dash} ${arcLen}" stroke-dashoffset="${arcLen}" data-label="${label}" data-amt="${amt}" data-pct="${pctOfTotal}%" data-color="${color}" style="transition:stroke-dashoffset ${0.8+i*0.15}s cubic-bezier(0.4,0,0.2,1) ${i*0.1}s;cursor:pointer;"/>`;
     });
-
     svg.innerHTML = html;
     requestAnimationFrame(() => requestAnimationFrame(() => {
       svg.querySelectorAll('.arc-path').forEach(p => { p.style.strokeDashoffset = '0'; });
     }));
-
     const tooltip = document.getElementById('arcTooltip');
     svg.querySelectorAll('.arc-path').forEach(path => {
       path.addEventListener('mouseenter', () => {
@@ -544,26 +592,15 @@
         tooltip.style.borderLeft = `3px solid ${path.dataset.color}`;
         tooltip.style.opacity = '1';
       });
-      path.addEventListener('mousemove', e => {
-        tooltip.style.left = (e.clientX + 16) + 'px';
-        tooltip.style.top  = (e.clientY - 10) + 'px';
-      });
+      path.addEventListener('mousemove', e => { tooltip.style.left = (e.clientX+16)+'px'; tooltip.style.top = (e.clientY-10)+'px'; });
       path.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
     });
-
     document.getElementById('budgetBullets').innerHTML = labels.map((l, i) => {
       const pct = ((values[i] / total) * 100).toFixed(1);
-      return `<div class="bb-item">
-        <div class="bb-left"><div class="bb-dot" style="background:${RAINBOW[i%RAINBOW.length]}"></div>${l}</div>
-        <div class="bb-right">
-          <span class="bb-amt">₹${values[i].toLocaleString('en-IN')}</span>
-          <span class="bb-pct">${pct}%</span>
-        </div>
-      </div>`;
+      return `<div class="bb-item"><div class="bb-left"><div class="bb-dot" style="background:${RAINBOW[i%RAINBOW.length]}"></div>${l}</div><div class="bb-right"><span class="bb-amt">₹${values[i].toLocaleString('en-IN')}</span><span class="bb-pct">${pct}%</span></div></div>`;
     }).join('');
   }
 
-  // ── Repayment capacity — uses real API data ──
   function renderRepayment(r) {
     if (!r) return;
     const fmt = n => '₹' + Number(n).toLocaleString('en-IN');
@@ -575,22 +612,43 @@
     document.getElementById('repayRisk').textContent       = r.risk_level;
   }
 
-  // ── Score breakdown bars ──
   function renderBreakdown(breakdown) {
-    if (!breakdown) return;
-    const maxDelta = Math.max(...breakdown.map(b => Math.abs(b.delta)));
+    if (!breakdown || !breakdown.length) return;
+    const gains    = breakdown.filter(b => b.delta >= 0).sort((a, b) => b.delta - a.delta);
+    const losses   = breakdown.filter(b => b.delta <  0).sort((a, b) => a.delta - b.delta);
+    const maxAbs   = Math.max(...breakdown.map(b => Math.abs(b.delta)));
+    const totalGain = gains.reduce((s, b) => s + b.delta, 0);
+    const totalLoss = losses.reduce((s, b) => s + b.delta, 0);
 
-    document.getElementById('breakdownList').innerHTML = breakdown.map(item => {
-      const isPos  = item.delta >= 0;
-      const width  = Math.round((Math.abs(item.delta) / maxDelta) * 100);
-      const color  = isPos ? '#00C9A7' : '#FF6B6B';
-      const sign   = isPos ? '+' : '';
-      return `<div class="bk-row">
-        <div class="bk-signal">${item.signal}</div>
-        <div class="bk-bar-wrap"><div class="bk-bar" style="width:${width}%;background:${color}"></div></div>
-        <div class="bk-delta ${isPos ? 'pos' : 'neg'}">${sign}${item.delta}</div>
+    function makeCard(item) {
+      const isGain = item.delta >= 0;
+      const cls    = isGain ? 'gain' : 'loss';
+      const sign   = isGain ? '+' : '';
+      const w      = Math.round((Math.abs(item.delta) / maxAbs) * 100);
+      return `<div class="bk-card ${cls}">
+        <div class="bk-card-top">
+          <span class="bk-signal-name">${item.signal}</span>
+          <span class="bk-delta-badge">${sign}${item.delta} pts</span>
+        </div>
+        <div class="bk-bar-bg">
+          <div class="bk-bar-fill" style="width:0%" data-w="${w}"></div>
+        </div>
       </div>`;
-    }).join('');
+    }
+
+    document.getElementById('gainsCol').innerHTML  = gains.map(makeCard).join('');
+    document.getElementById('lossesCol').innerHTML = losses.map(makeCard).join('');
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      document.querySelectorAll('.bk-bar-fill').forEach(el => {
+        el.style.transition = 'width 1s ease';
+        el.style.width = el.dataset.w + '%';
+      });
+    }));
+
+    document.getElementById('breakdownPills').innerHTML = `
+      <span class="bsp g">+${totalGain} pts gained</span>
+      <span class="bsp l">${totalLoss} pts lost</span>`;
   }
 </script>
 </body>
