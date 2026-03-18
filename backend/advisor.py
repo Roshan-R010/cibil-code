@@ -36,6 +36,7 @@ Rules:
 - Focus advice on spending habits, saving behavior, and building financial consistency looking at their spendings"""
             },
             {
+                "role": "user",
                 "content": f"""My credit score is {score}/900.
 
 My spending breakdown this month:

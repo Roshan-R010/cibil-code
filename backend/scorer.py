@@ -503,8 +503,14 @@ def calculate_score(transactions: list[dict], personal: dict) -> dict:
     score += delta
     breakdown.append({"signal": "Loan Purpose",          "delta": delta, "reason": reason})
 
-    # ── FINAL SCORE ──
-    final_score = clamp(score)
+    #FINAL SCORE CALCULATION
+    total_spent  = sum(abs(t['amount']) for t in debits)
+    total_income = sum(t['amount'] for t in credits)
+
+    if total_income > 0 and total_spent >= total_income:
+        final_score = min(clamp(score), 649)  # cap at Fair
+    else:
+        final_score = clamp(score)
 
     return {
         "cibil_score":         final_score,

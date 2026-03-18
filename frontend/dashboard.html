@@ -226,7 +226,7 @@
 </div>
 
 <nav>
-  <a href="index.html" class="nav-logo">
+  <a href="home.html" class="nav-logo">
     <div class="nav-logo-mark">
       <svg viewBox="0 0 18 18" fill="none">
         <path d="M3 15 L9 3 L15 15" stroke="#4DABF7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -315,7 +315,7 @@
         </div>
         <div class="w-card">
           <div class="line-top">
-            <div class="w-label" style="margin-bottom:0;">Cumulative Spend Trend</div>
+            <div class="w-label" style="margin-bottom:0;">Spending by Category</div>
             <div class="line-stats" id="lineStats"></div>
           </div>
           <div class="line-wrap"><canvas id="lineChart"></canvas></div>
@@ -342,7 +342,6 @@
             <div class="repay-item"><div class="rv" id="repaySpent">—</div><div class="rl">Monthly Spending</div></div>
             <div class="repay-item"><div class="rv" id="repayDisposable">—</div><div class="rl">Disposable Income</div></div>
             <div class="repay-item"><div class="rv" id="repayEMI">—</div><div class="rl">Max Safe EMI/month</div></div>
-            <div class="repay-item"><div class="rv" id="repayRate">—</div><div class="rl">Interest Rate</div></div>
             <div class="repay-item"><div class="rv" id="repayRisk">—</div><div class="rl">Risk Level</div></div>
           </div>
         </div>
@@ -378,7 +377,7 @@
   const uploadData = JSON.parse(sessionStorage.getItem('finsight_upload') || '{}');
   let lineInstance = null;
 
-  function logout() { sessionStorage.clear(); window.location.href = 'index.html'; }
+  function logout() { sessionStorage.clear(); window.location.href = 'home.html'; }
 
   function showToast(msg, type = 'error') {
     const t = document.getElementById('toast');
@@ -399,6 +398,11 @@
   }
 
   window.addEventListener('DOMContentLoaded', () => {
+    const existingScore = sessionStorage.getItem('finsight_score');
+    const existingCats  = sessionStorage.getItem('finsight_categories');
+    if (existingScore && existingCats) {
+        renderInsights(JSON.parse(existingScore), JSON.parse(existingCats));
+    }
     FIELD_IDS.forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener('input',  () => { clearFieldError(id); updateSubmitBtn(); });
@@ -512,6 +516,8 @@
     document.getElementById('state-form').classList.remove('active');
     document.getElementById('state-insights').classList.add('active');
     document.getElementById('step-pill').textContent = 'Step 2 of 2';
+    // Show total transactions
+    document.getElementById('step-pill').textContent = `${data.summary?.total_txns || 0} transactions analysed`;
     renderScore(data.cibil_score, data.band);
     renderLine(categories);
     renderBudgetArc(categories);
@@ -529,16 +535,18 @@
 
   function renderLine(cats) {
     if (lineInstance) lineInstance.destroy();
-    const labels = Object.keys(cats), values = Object.values(cats);
+
+    // Sort high to low so highest category is first
+    const sorted = Object.entries(cats).sort((a, b) => b[1] - a[1]);
+    const labels = sorted.map(e => e[0]);
+    const values = sorted.map(e => e[1]);
+
     if (!labels.length) return;
-    const total = values.reduce((a, b) => a + b, 0);
-    const avg   = Math.round(total / values.length);
-    const cumData = values.reduce((acc, v, i) => { acc.push((acc[i-1]||0)+v); return acc; }, []);
-    const topCat  = labels[values.indexOf(Math.max(...values))];
+    const total  = values.reduce((a, b) => a + b, 0);
+    const topCat = labels[0];
 
     document.getElementById('lineStats').innerHTML = `
-      <div class="ls"><div class="lv">₹${total.toLocaleString('en-IN')}</div><div class="ll">Total</div></div>
-      <div class="ls"><div class="lv">₹${avg.toLocaleString('en-IN')}</div><div class="ll">Avg/Category</div></div>
+      <div class="ls"><div class="lv">₹${total.toLocaleString('en-IN')}</div><div class="ll">Total Spend</div></div>
       <div class="ls"><div class="lv">${topCat.split(' ')[0]}</div><div class="ll">Top Category</div></div>`;
 
     const ctx  = document.getElementById('lineChart').getContext('2d');
@@ -547,20 +555,43 @@
     grad.addColorStop(1, 'rgba(77,171,247,0)');
 
     lineInstance = new Chart(ctx, {
-      type: 'line',
-      data: { labels, datasets: [{ data: cumData, borderColor: '#4DABF7', borderWidth: 2.5, pointBackgroundColor: '#fff', pointBorderColor: '#4DABF7', pointBorderWidth: 2, pointRadius: 5, pointHoverRadius: 7, fill: true, backgroundColor: grad, tension: 0.45 }] },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1A1D25', titleColor: 'rgba(255,255,255,0.5)', bodyColor: '#fff', padding: 13, cornerRadius: 9, titleFont: { family: 'Libre Baskerville', size: 11, style: 'italic' }, bodyFont: { family: 'Libre Baskerville', size: 13 }, callbacks: { title: ctx => ctx[0].label, label: ctx => `  Cumulative: ₹${ctx.parsed.y.toLocaleString('en-IN')}` } } },
-        scales: { x: { grid: { display: false }, border: { display: false }, ticks: { color: '#9CA3AF', font: { family: 'Libre Baskerville', size: 11 }, maxRotation: 0 } }, y: { grid: { color: '#F0F0F0' }, border: { display: false }, ticks: { color: '#9CA3AF', font: { family: 'Libre Baskerville', size: 11 }, callback: v => '₹'+(v>=1000?(v/1000).toFixed(0)+'k':v) } } },
-        animation: { duration: 1000, easing: 'easeOutQuart' }
-      }
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                borderColor: '#4DABF7', borderWidth: 2.5,
+                pointBackgroundColor: '#fff', pointBorderColor: '#4DABF7',
+                pointBorderWidth: 2, pointRadius: 5, pointHoverRadius: 7,
+                fill: true, backgroundColor: grad, tension: 0.45,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#1A1D25', titleColor: 'rgba(255,255,255,0.5)', bodyColor: '#fff',
+                    padding: 13, cornerRadius: 9,
+                    titleFont: { family: 'Libre Baskerville', size: 11, style: 'italic' },
+                    bodyFont:  { family: 'Libre Baskerville', size: 13 },
+                    callbacks: {
+                        title: ctx => ctx[0].label,
+                        label: ctx => `  ₹${ctx.parsed.y.toLocaleString('en-IN')}`
+                    }
+                }
+            },
+            scales: {
+                x: { grid: { display: false }, border: { display: false }, ticks: { color: '#9CA3AF', font: { family: 'Libre Baskerville', size: 11 }, maxRotation: 30 } },
+                y: { grid: { color: '#F0F0F0' }, border: { display: false }, ticks: { color: '#9CA3AF', font: { family: 'Libre Baskerville', size: 11 }, callback: v => '₹'+(v>=1000?(v/1000).toFixed(0)+'k':v) } }
+            },
+            animation: { duration: 1000, easing: 'easeOutQuart' }
+        }
     });
-  }
+}
+const RAINBOW = ['#845EF7','#4DABF7','#F06595','#00C9A7','#FFC107','#FF6B6B','#20C997','#FFA94D'];
 
-  const RAINBOW = ['#845EF7','#4DABF7','#F06595','#00C9A7','#FFC107','#FF6B6B','#20C997','#FFA94D'];
-
-  function renderBudgetArc(cats) {
+function renderBudgetArc(cats) {
     const svg = document.getElementById('budgetSvg');
     const labels = Object.keys(cats), values = Object.values(cats);
     if (!labels.length) return;
@@ -570,36 +601,36 @@
     const cx = 200, cy = 215, strokeW = 15, gap = 7, baseR = 38;
     let html = '';
     labels.forEach((label, i) => {
-      const r = baseR + i * (strokeW + gap);
-      const pct = values[i] / max;
-      const arcLen = Math.PI * r, dash = pct * arcLen;
-      const color = RAINBOW[i % RAINBOW.length];
-      const pctOfTotal = ((values[i] / total) * 100).toFixed(1);
-      const amt = '₹' + values[i].toLocaleString('en-IN');
-      html += `<path d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}" fill="none" stroke="#F0F0F0" stroke-width="${strokeW}" stroke-linecap="round"/>`;
-      html += `<path class="arc-path" d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}" fill="none" stroke="${color}" stroke-width="${strokeW}" stroke-linecap="round" stroke-dasharray="${dash} ${arcLen}" stroke-dashoffset="${arcLen}" data-label="${label}" data-amt="${amt}" data-pct="${pctOfTotal}%" data-color="${color}" style="transition:stroke-dashoffset ${0.8+i*0.15}s cubic-bezier(0.4,0,0.2,1) ${i*0.1}s;cursor:pointer;"/>`;
+        const r = baseR + i * (strokeW + gap);
+        const pct = values[i] / max;
+        const arcLen = Math.PI * r, dash = pct * arcLen;
+        const color = RAINBOW[i % RAINBOW.length];
+        const pctOfTotal = ((values[i] / total) * 100).toFixed(1);
+        const amt = '₹' + values[i].toLocaleString('en-IN');
+        html += `<path d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}" fill="none" stroke="#F0F0F0" stroke-width="${strokeW}" stroke-linecap="round"/>`;
+        html += `<path class="arc-path" d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}" fill="none" stroke="${color}" stroke-width="${strokeW}" stroke-linecap="round" stroke-dasharray="${dash} ${arcLen}" stroke-dashoffset="${arcLen}" data-label="${label}" data-amt="${amt}" data-pct="${pctOfTotal}%" data-color="${color}" style="transition:stroke-dashoffset ${0.8+i*0.15}s cubic-bezier(0.4,0,0.2,1) ${i*0.1}s;cursor:pointer;"/>`;
     });
     svg.innerHTML = html;
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      svg.querySelectorAll('.arc-path').forEach(p => { p.style.strokeDashoffset = '0'; });
+        svg.querySelectorAll('.arc-path').forEach(p => { p.style.strokeDashoffset = '0'; });
     }));
     const tooltip = document.getElementById('arcTooltip');
     svg.querySelectorAll('.arc-path').forEach(path => {
-      path.addEventListener('mouseenter', () => {
-        document.getElementById('ttName').textContent = path.dataset.label;
-        document.getElementById('ttAmt').textContent  = path.dataset.amt;
-        document.getElementById('ttPct').textContent  = path.dataset.pct + ' of total spend';
-        tooltip.style.borderLeft = `3px solid ${path.dataset.color}`;
-        tooltip.style.opacity = '1';
-      });
-      path.addEventListener('mousemove', e => { tooltip.style.left = (e.clientX+16)+'px'; tooltip.style.top = (e.clientY-10)+'px'; });
-      path.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
+        path.addEventListener('mouseenter', () => {
+            document.getElementById('ttName').textContent = path.dataset.label;
+            document.getElementById('ttAmt').textContent  = path.dataset.amt;
+            document.getElementById('ttPct').textContent  = path.dataset.pct + ' of total spend';
+            tooltip.style.borderLeft = `3px solid ${path.dataset.color}`;
+            tooltip.style.opacity = '1';
+        });
+        path.addEventListener('mousemove', e => { tooltip.style.left = (e.clientX+16)+'px'; tooltip.style.top = (e.clientY-10)+'px'; });
+        path.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
     });
     document.getElementById('budgetBullets').innerHTML = labels.map((l, i) => {
-      const pct = ((values[i] / total) * 100).toFixed(1);
-      return `<div class="bb-item"><div class="bb-left"><div class="bb-dot" style="background:${RAINBOW[i%RAINBOW.length]}"></div>${l}</div><div class="bb-right"><span class="bb-amt">₹${values[i].toLocaleString('en-IN')}</span><span class="bb-pct">${pct}%</span></div></div>`;
+        const pct = ((values[i] / total) * 100).toFixed(1);
+        return `<div class="bb-item"><div class="bb-left"><div class="bb-dot" style="background:${RAINBOW[i%RAINBOW.length]}"></div>${l}</div><div class="bb-right"><span class="bb-amt">₹${values[i].toLocaleString('en-IN')}</span><span class="bb-pct">${pct}%</span></div></div>`;
     }).join('');
-  }
+}
 
   function renderRepayment(r) {
     if (!r) return;
@@ -607,9 +638,19 @@
     document.getElementById('repayIncome').textContent     = fmt(r.monthly_income);
     document.getElementById('repaySpent').textContent      = fmt(r.monthly_spending);
     document.getElementById('repayDisposable').textContent = fmt(r.disposable_income);
-    document.getElementById('repayEMI').textContent        = fmt(r.max_safe_emi);
-    document.getElementById('repayRate').textContent       = r.interest_rate + '% p.a.';
+    document.getElementById('repayEMI').textContent        = r.max_safe_emi > 0 ? fmt(r.max_safe_emi) : 'Not eligible yet';
     document.getElementById('repayRisk').textContent       = r.risk_level;
+
+    // Show helpful message if EMI is 0
+    if (r.max_safe_emi === 0 || r.disposable_income <= 0) {
+        document.getElementById('repayEMI').style.color = '#FF6B6B';
+        document.getElementById('repayEMI').style.fontSize = '0.85rem';
+        // Add tip below the grid
+        const tip = document.createElement('p');
+        tip.style.cssText = 'font-size:0.78rem;color:#6B7280;font-style:italic;margin-top:14px;line-height:1.6;';
+        tip.textContent = '💡 Your spending slightly exceeds your income this month. Reduce discretionary spending to build disposable income and unlock loan eligibility.';
+        document.querySelector('.repay-grid').after(tip);
+    }
   }
 
   function renderBreakdown(breakdown) {

@@ -221,7 +221,7 @@
 <div id="toast"></div>
 
 <nav>
-  <a href="index.html" class="nav-logo">
+  <a href="home.html" class="nav-logo">
     <div class="nav-logo-mark">
       <svg viewBox="0 0 18 18" fill="none">
         <path d="M3 15 L9 3 L15 15" stroke="#4DABF7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -242,7 +242,7 @@
   <!-- No session fallback -->
   <div id="no-session">
     <h2>No score found</h2>
-    <p>Please <a href="index.html">upload your statement</a> and generate your score first.</p>
+    <p>Please <a href="home.html">upload your statement</a> and generate your score first.</p>
   </div>
 
   <!-- Main advisor UI -->
@@ -323,7 +323,7 @@
   const scoreData = JSON.parse(sessionStorage.getItem('finsight_score') || 'null');
   const categories = JSON.parse(sessionStorage.getItem('finsight_categories') || '{}');
 
-  function logout() { sessionStorage.clear(); window.location.href = 'index.html'; }
+  function logout() { sessionStorage.clear(); window.location.href = 'home.html'; }
 
   function showToast(msg, type = 'error') {
     const t = document.getElementById('toast');
@@ -454,7 +454,7 @@
 
       if (!res.ok) throw new Error('Server error');
       const data = await res.json();
-      const reply = data.response || data.answer || data.message || 'No response received.';
+      const reply = data.advice || data.response || data.answer || 'No response received.';
       appendMsg('ai', reply);
 
     } catch (err) {
